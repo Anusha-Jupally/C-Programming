@@ -1,0 +1,88 @@
+// 5. Program to implement stacks using Single linked lists
+
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node
+{
+    int item;
+    struct node *next;
+};
+
+struct node *head = NULL;
+
+void push(int item);
+void pop();
+void display();
+
+int main()
+{
+    int item, choice;
+
+    for(;;)
+    {
+        printf("1.Push\t2.Pop\t3.Display\t4.Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d",&choice);
+        switch(choice)
+        {
+            case 1:
+                printf("Enter the item to insert: ");
+                scanf("%d",&item);
+                push(item);
+                break;
+            case 2:
+                pop();
+                break;
+            case 3:
+                display();
+                break;
+            default:
+                exit(0);	          
+        }
+    }
+    return 0;
+}
+
+void push(int item)
+{
+    struct node *newNode = (struct node*)malloc(sizeof(struct node));
+    if (newNode == NULL)
+    {
+        printf("Memory allocation failed\n");
+        return;
+    }
+    newNode->item = item;
+    newNode->next = head;
+    head = newNode;
+    printf("Item %d pushed to the stack\n", item);
+}
+
+void pop()
+{
+    if(head == NULL)
+    {
+        printf("Stack is empty\n");
+        return;
+    }
+    struct node *temp = head;
+    printf("The deleted item = %d\n", temp->item);
+    head = temp->next;
+    free(temp);
+}
+
+void display()
+{
+    if(head == NULL)
+    {
+        printf("Stack is empty\n");
+        return;
+    }
+    struct node *temp = head;
+    printf("The contents of stack are:\n");
+    while(temp != NULL)
+    {
+        printf("%d\n", temp->item);
+        temp = temp->next;
+    }
+}

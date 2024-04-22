@@ -1,0 +1,127 @@
+// 9. Program to reverse a single linked list using iteration
+
+#include <stdio.h>
+#include <stdlib.h>
+struct node
+{
+    int data;           
+    struct node *next; 
+}*head;
+
+
+void createList(int n);
+void displayList();
+void reverselist();
+
+int main()
+{
+	int choice,data,n,position;
+	printf("Enter the total number of nodes: ");
+	scanf("%d",&n);
+	
+	createList(n);
+	
+	do
+	{
+		printf("\n1.Display List \n");
+		printf("2.Reverse the list\n");
+		printf("0.Exit\n");
+		
+		printf("Enter your choice :");
+		scanf("%d",&choice);
+		
+		switch(choice)
+		{
+			case 0: printf("Exiting the program\n");
+				    break;
+			case 1: printf("\nData in the list\n");
+				    displayList();
+				    break;
+    	    case 2: printf("\nReversing the list \n");
+    				reverselist();
+    				displayList();
+    				break;
+    			default : printf("Invalid choice. Please enter a valid option.\n");
+    		}
+    	}while(choice!=0);
+    return 0;
+}
+void createList(int n)
+{
+    struct node *newNode, *temp;
+    int data, i;
+    head = (struct node *)malloc(sizeof(struct node));
+    if(head == NULL)
+    {
+        printf("Unable to allocate memory.");
+    }
+    else
+    {
+        printf("Enter the data of node 1: ");
+        scanf("%d", &data);
+        head->data = data; 
+        head->next = NULL; 
+        temp = head;
+        for(i=2; i<=n; i++)
+        {
+            newNode = (struct node *)malloc(sizeof(struct node));
+            if(newNode == NULL)
+            {
+                printf("Unable to allocate memory.");
+                break;
+            }
+            else
+            {
+                printf("Enter the data of node %d: ", i);
+                scanf("%d", &data);
+                newNode->data = data; 
+                newNode->next = NULL; 
+                temp->next = newNode; 
+                temp = temp->next; 
+            }
+        }
+        printf("SINGLY LINKED LIST CREATED SUCCESSFULLY\n");
+    }
+}
+void displayList()
+{
+    struct node *temp;
+    if(head == NULL)
+    {
+        printf("List is empty.");
+    }
+    else
+    {
+        temp = head;
+        while(temp != NULL)
+        {
+            printf("Data = %d\n", temp->data); 
+            temp = temp->next;                 
+        }
+    }
+}
+void reverselist()
+{
+	struct node *prev,*current,*next;
+	prev=NULL;
+	current=head;
+	if(head==NULL)
+	{
+		printf("List is empty.\n");
+		return;
+	}
+	while(current!=NULL)
+	{
+		next=current->next;
+		current->next=prev;
+		prev=current;
+		current=next;
+	}
+	head = prev;
+	printf("List reversed successfully.\n");
+}
+
+
+
+		
+			

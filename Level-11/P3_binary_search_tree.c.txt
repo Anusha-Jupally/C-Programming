@@ -1,0 +1,167 @@
+// 3. Program to implement Binary search tree with functions insert_left, insert_right, delete_left, delete_right, search
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node 
+{
+    int item;
+    struct node* left;
+    struct node* right;
+};
+
+struct node* createNode(int value);
+struct node* insertLeft(struct node* root, int value);
+struct node* insertRight(struct node* root, int value);
+struct node* delete_left(struct node* root);
+struct node* delete_right(struct node* root);
+struct node* search(struct node* root, int key);
+
+int main() 
+{
+    struct node* root = NULL;
+    int ch, value;
+
+    while(1) 
+    {
+        printf("\n1. Insert Left\n");
+        printf("2. Insert Right\n");
+        printf("3. Delete Left\n");
+        printf("4. Delete Right\n");
+        printf("5. Search\n");
+        printf("6. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &ch);
+
+        switch(ch) 
+        {
+            case 1:printf("Enter value to insert at left: ");
+                    scanf("%d", &value);
+                    if (root == NULL)
+                        root = createNode(value);
+                    else 
+                    {
+                        printf("Enter value of parent node: ");
+                        scanf("%d", &value);
+                        struct node* parent = search(root, value);
+                        if(parent == NULL)     
+                        {
+                            printf("Parent node not found.\n");
+                            break;
+                        }
+                        insertLeft(parent, value);
+                    }
+                    break;
+            case 2:printf("Enter value to insert at right: ");
+                    scanf("%d", &value);
+                    if (root == NULL)
+                        root = createNode(value);
+                    else 
+                    {
+                        printf("Enter value of parent node: ");
+                        scanf("%d", &value);
+                        struct node* parent = search(root, value);
+                        if(parent == NULL) 
+                        {
+                            printf("Parent node not found.\n");
+                            break;
+                        }
+                        insertRight(parent, value);
+                    }
+                    break;
+            case 3:root = delete_left(root);
+                    break;
+            case 4:root = delete_right(root);
+                    break;
+            case 5:printf("Enter value to search: ");
+                    scanf("%d", &value);
+                    if(search(root, value) != NULL)
+                        printf("Node found.\n");
+                    else
+                        printf("Node not found.\n");
+                    break;
+            
+            case 6:printf("Exiting program.\n");
+                    exit(0);
+            default:
+                printf("Invalid choice, please try again.\n");
+        }
+    }
+    return 0;
+}
+
+struct node* createNode(int value) 
+{
+    struct node* newNode = (struct node*)malloc(sizeof(struct node));
+    if(newNode == NULL) 
+    {
+        printf("Memory allocation failed.");
+        exit(1);
+    }
+    newNode->item = value;
+    newNode->left = NULL;
+    newNode->right = NULL;
+    return newNode;
+}
+
+struct node* insertLeft(struct node* root, int value) 
+{
+    if(root == NULL) 
+    {
+        printf("Parent node does not exist.");
+        return NULL;
+    }
+    root->left = createNode(value);
+    return root->left;
+}
+
+struct node* insertRight(struct node* root, int value) 
+{
+    if(root == NULL) 
+    {
+        printf("Parent node does not exist.");
+        return NULL;
+    }
+    root->right = createNode(value);
+    return root->right;
+}
+
+struct node* delete_left(struct node* root) 
+{
+    if(root == NULL) 
+    {
+        printf("Node is NULL, cannot delete left child.");
+        return NULL;
+    }
+    struct node* temp = root->left;
+    root->left = NULL;
+    free(temp);
+    return NULL;
+}
+
+struct node* delete_right(struct node* root) 
+{
+    if(root == NULL) 
+    {
+        printf("Node is NULL, cannot delete right child.");
+        return NULL;
+    }
+    struct node* temp = root->right;
+    root->right = NULL;
+    free(temp);
+    return NULL;
+}
+
+struct node* search(struct node* root, int key) 
+{
+    if(root == NULL || root->item == key) 
+    {
+        return root;
+    }
+    if(root->item < key) 
+    {
+        return search(root->right, key);
+    }
+    return search(root->left, key);
+}
+

@@ -1,0 +1,23 @@
+// 24. isupper_l - test for an uppercase letter
+
+#include<stdio.h>
+#include<ctype.h>
+#include<locale.h>
+
+int main()
+{
+    locale_t loc = newlocale(LC_ALL_MASK,"en_US.UTF-8",(locale_t)0);
+    if(loc == (locale_t)0)
+    {
+        perror("newlocale");
+        return 1;
+    }
+    
+    char ch='A';
+    if(isupper_l(ch,loc))
+        printf("%c is in upper case character\n",ch);
+    else
+        printf("Not upper case character\n");
+    freelocale(loc);
+    return 0;
+}

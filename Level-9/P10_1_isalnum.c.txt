@@ -1,0 +1,15 @@
+//1. isalnum - test for an alphanumeric character
+
+#include<stdio.h>
+#include<ctype.h>
+int main()
+{
+    char ch;
+    printf("Enter character:\n");
+    scanf("%c",&ch);
+    if(isalnum(ch))
+        printf("Character is alphanumeric\n");
+    else
+        printf("Character is not alphanumeric\n");
+    return 0;    
+}

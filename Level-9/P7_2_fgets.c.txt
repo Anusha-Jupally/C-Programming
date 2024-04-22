@@ -1,0 +1,21 @@
+// 2. fgets - get a string from a stream
+
+#include<stdio.h>
+#include<stdlib.h>
+#define size 20
+int main()
+{
+    FILE *fp;
+    char str[size];
+    fp = fopen("file1.txt","r");
+    if(fp == NULL)
+    {
+        printf("Error in opening file\n");
+        exit(1);
+    }
+    printf("File opened successfully\n");
+    fgets(str,size,fp);
+    printf("%s\n",str);
+    fclose(fp);
+    return 0;   
+}

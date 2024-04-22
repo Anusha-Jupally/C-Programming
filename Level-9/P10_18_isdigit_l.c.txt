@@ -1,0 +1,23 @@
+// 18. isdigit_l - test for a decimal digit
+
+#include<stdio.h>
+#include<ctype.h>
+#include<locale.h>
+
+int main()
+{
+    locale_t loc = newlocale(LC_ALL_MASK,"en_US.UTF-8",(locale_t)0);
+    if(loc == (locale_t)0)
+    {
+        perror("newlocale");
+        return 1;
+    }
+    
+    char ch='1';
+    if(isdigit_l(ch,loc))
+        printf("%c is a digit\n",ch);
+    else
+        printf("Not a digit\n");
+    freelocale(loc);
+    return 0;
+}

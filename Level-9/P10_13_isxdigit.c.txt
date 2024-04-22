@@ -1,0 +1,16 @@
+// 13. isxdigit - test for a hexadecimal digit
+
+#include<stdio.h>
+#include<ctype.h>
+
+int main()
+{
+    char ch;
+    printf("Enter character: ");
+    scanf("%c",&ch);
+    if(isxdigit(ch) > 0)
+        printf("%c is hexadecimal digit\n",ch);
+    else
+        printf("%c is not hexadecimal digit\n",ch);
+    return 0;
+}

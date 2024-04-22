@@ -1,0 +1,16 @@
+// 11. isspace - test for a white-space character
+
+#include<stdio.h>
+#include<ctype.h>
+
+int main()
+{
+    char ch;
+    printf("Enter character: ");
+    scanf("%c",&ch);
+    if(isspace(ch) > 0)
+        printf("White-space character\n");
+    else
+        printf("Not a white-space character\n");
+    return 0;
+}

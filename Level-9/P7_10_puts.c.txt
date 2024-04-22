@@ -1,0 +1,10 @@
+// 10. puts - put a string on standard output
+
+#include<stdio.h>
+
+int main()
+{
+    char str[20] = "Hello";
+    puts(str);
+    return 0;
+}

@@ -1,0 +1,13 @@
+//4. sprintf - print formatted output
+
+#include<stdio.h>
+#define size 50 
+
+int main()
+{
+    int num = 10;;
+    char buf[size];
+    sprintf(buf,"%d %s %f",num,"Hello",10.20);
+    printf("%s\n",buf);
+    return 0;
+}

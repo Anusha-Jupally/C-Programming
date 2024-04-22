@@ -1,0 +1,14 @@
+// 7.isgraph - test for a visible character
+
+#include<stdio.h>
+#include<ctype.h>
+int main() 
+{ 
+    char ch1='A';
+    char ch2='1';
+    if(isgraph(ch1))
+        printf("%c \n",ch1);
+    if(isgraph(ch2))
+        printf("%c \n",ch2);
+    return 0;    
+} 

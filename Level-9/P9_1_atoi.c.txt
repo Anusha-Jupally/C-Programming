@@ -1,0 +1,13 @@
+// 1. atoi - convert a string to an integer
+
+#include<stdio.h>
+#include<stdlib.h>
+int main()
+{
+    char str[10];
+    printf("Enter string:\n");
+    scanf("%s",str);
+    int num = atoi(str); 
+    printf("String to be Converted: %s\n", str); 
+    printf("Converted to Integer: %d\n", num); 
+}

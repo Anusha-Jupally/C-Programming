@@ -1,0 +1,21 @@
+// 3. dprintf - print formatted output
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <unistd.h>
+
+int main() 
+{
+    int fd = open("output.txt", O_RDWR | O_CREAT);
+    if (fd == -1) 
+    {
+        printf("Error in opening file\n");
+        exit(1);
+    }
+    
+    dprintf(fd, "This is a formatted output: %d %s\n", 42, "Hello");
+    close(fd);
+    
+    return 0;
+}

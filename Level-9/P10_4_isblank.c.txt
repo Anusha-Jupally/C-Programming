@@ -1,0 +1,22 @@
+//4. isblank - test for a blank character
+
+#include<stdio.h>
+#include<ctype.h>
+int main() 
+{ 
+    char str[100];
+    printf("Enter string:");
+    fgets(str,100,stdin);
+    int i = 0; 
+    int count = 0; 
+    while(str[i]) 
+    { 
+        char ch = str[i++]; 
+        if(isblank(ch)) 
+        {
+            count++; 
+        } 
+    } 
+    printf("Total blanks : %d\n",count);
+    return 0; 
+} 

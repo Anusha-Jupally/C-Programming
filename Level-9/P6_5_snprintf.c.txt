@@ -1,0 +1,17 @@
+// 5.snprintf - print formatted output
+
+#include<stdio.h>
+#define size 50 
+
+int main()
+{
+    int n;
+    char buf[size],str[size];
+    printf("Enter string: ");
+    fgets(str,size,stdin);
+    printf("Enter the value of n: ");
+    scanf("%d",&n);
+    snprintf(buf,n,"%s",str);
+    printf("%s\n",buf);
+    return 0;
+}

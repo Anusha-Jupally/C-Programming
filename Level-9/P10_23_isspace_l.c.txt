@@ -1,0 +1,23 @@
+// 23.isspace_l - test for a white-space character
+
+#include<stdio.h>
+#include<ctype.h>
+#include<locale.h>
+
+int main()
+{
+    locale_t loc = newlocale(LC_ALL_MASK,"en_US.UTF-8",(locale_t)0);
+    if(loc == (locale_t)0)
+    {
+        perror("newlocale");
+        return 1;
+    }
+    
+    char ch=' ';
+    if(isspace_l(ch,loc))
+        printf("%c is whitespce character\n",ch);
+    else
+        printf("Not a whitespace character\n");
+    freelocale(loc);
+    return 0;
+}

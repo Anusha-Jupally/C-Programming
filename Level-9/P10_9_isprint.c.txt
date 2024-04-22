@@ -1,0 +1,16 @@
+//9. isprint - test for a printable character
+
+#include<stdio.h>
+#include<ctype.h>
+
+int main()
+{
+    char ch;
+    printf("Enter character: ");
+    scanf("%c",&ch);
+    if(isprint(ch) > 0)
+        printf("printable\n");
+    else
+        printf("Not printable\n");
+    return 0;
+}

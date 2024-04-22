@@ -1,0 +1,15 @@
+//3. isascii - test for a 7-bit US-ASCII character
+
+#include<stdio.h>
+#include<ctype.h>
+int main()
+{
+    char ch;
+    printf("Enter character:\n");
+    scanf("%c",&ch);
+    if(isascii(ch) == 0)
+        printf("Cannot represent in acsii\n");
+    else
+        printf("%c\n",ch);
+    return 0;    
+}

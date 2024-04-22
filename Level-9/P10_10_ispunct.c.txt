@@ -1,0 +1,16 @@
+//10. ispunct - test for a punctuation character
+
+#include<stdio.h>
+#include<ctype.h>
+
+int main()
+{
+    char ch;
+    printf("Enter character: ");
+    scanf("%c",&ch);
+    if(ispunct(ch) > 0)
+        printf("Punctuation character\n");
+    else
+        printf("Not punctuation character\n");
+    return 0;
+}

@@ -1,0 +1,16 @@
+//8. islower - test for a lowercase letter
+
+#include<stdio.h>
+#include<ctype.h>
+
+int main()
+{
+    char ch;
+    printf("Enter character: ");
+    scanf("%c",&ch);
+    if(islower(ch))
+        printf("%c is in lower case\n",ch);
+    else
+        printf("%c is not in lower case\n",ch);
+    return 0;
+}

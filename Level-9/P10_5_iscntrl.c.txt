@@ -1,0 +1,15 @@
+// 5. iscntrl - test for a control character
+
+#include<stdio.h>
+#include<ctype.h>
+int main() 
+{ 
+    char str[ ] = "Hello \t World!";
+    int i=0;
+    while(!(iscntrl(str[i])))
+    {
+        printf("%c",str[i]);
+        i++;
+    }
+    return 0; 
+} 

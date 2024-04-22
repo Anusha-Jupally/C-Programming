@@ -1,0 +1,12 @@
+// 9. putchar - put a byte on a stdout stream
+
+#include<stdio.h>
+
+int main()
+{
+    char c;
+    printf("Enter character : ");
+    scanf("%c",&c);
+    putchar(c);
+    return 0;
+}

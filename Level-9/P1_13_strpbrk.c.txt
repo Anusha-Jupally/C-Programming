@@ -1,0 +1,21 @@
+// 13.strpbrk - scan a string for a byte
+
+#include<stdio.h>
+#include<string.h> 
+#define size 50 
+
+int main()
+{
+    char str1[size],str2[size];
+    char *ptr;
+    printf("Enter string1: ");
+    fgets(str1,size,stdin);
+    printf("Enter string2: ");
+    fgets(str2,size,stdin);
+    ptr = strpbrk(str1,str2);
+    if(ptr == NULL)
+    printf("Character not found\n");
+    else
+    printf("First matching charcater: %c",*ptr);
+    return 0;   
+}

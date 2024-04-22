@@ -1,0 +1,15 @@
+// 26.strfry - randomize a string
+
+#define _GNU_SOURCE
+#include<stdio.h>
+#include<string.h> 
+#define size 50 
+
+int main()
+{
+    char str[size];
+    printf("Enter string 1:");
+    scanf("%s",str);
+    printf("string : %s\n",strfry(str));
+    return 0;   
+}

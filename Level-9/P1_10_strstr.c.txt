@@ -1,0 +1,23 @@
+// 10. strstr - find a substring
+
+#include<stdio.h>
+#include<string.h> 
+#define size 50 
+
+int main()
+{
+    char src[size], search[size];
+    char *ptr;
+    printf("Enter source string: ");
+    fgets(src, size, stdin);
+    src[strcspn(src, "\n")] = '\0';
+    printf("Enter substring: ");
+    fgets(search, size, stdin);
+    search[strcspn(search, "\n")] = '\0';
+    ptr = strstr(src, search);
+    if(ptr == NULL)
+        printf("Sub string is not present\n");
+    else
+        printf("The sub string is: %s\n", ptr);
+    return 0;   
+}

@@ -1,0 +1,19 @@
+// 27.strxfrm - string transformation
+
+#define _GNU_SOURCE
+#include<stdio.h>
+#include<string.h> 
+#define size 50 
+
+int main()
+{
+    char src[size],dest[size];
+    int n;
+	printf("Enter src string: ");
+	fgets(src,size,stdin);
+	printf("Enter value of n: ");
+	scanf("%d",&n);
+	int ret = strxfrm(dest,src,n);
+	printf("String :%s\n",dest);
+	return 0; 
+}

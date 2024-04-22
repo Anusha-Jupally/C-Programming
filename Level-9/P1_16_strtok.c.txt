@@ -1,0 +1,20 @@
+// 16. strtok - split string into tokens
+
+#include<stdio.h>
+#include<string.h> 
+#define size 50 
+
+int main()
+{
+    char str[size];
+    const char s[2] = "-";
+    printf("Enter string: ");
+    fgets(str,size,stdin);
+    char *ptr = strtok(str,s);
+    while(ptr != NULL)
+    {
+        printf("%s ",ptr);
+        ptr = strtok(NULL,"-");
+    }
+   return 0;   
+}

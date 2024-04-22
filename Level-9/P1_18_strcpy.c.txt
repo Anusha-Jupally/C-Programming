@@ -1,0 +1,15 @@
+// 18. strcpy - copy a string and return a pointer to the end of the result
+
+#include<stdio.h>
+#include<string.h> 
+#define size 50 
+
+int main()
+{
+    char src[size],des[size];
+    printf("Enter source string: ");
+    fgets(src,size,stdin);
+    strcpy(des,src);
+    printf("String after copying : %s\n",des);
+    return 0;   
+}

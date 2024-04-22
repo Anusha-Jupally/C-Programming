@@ -1,0 +1,17 @@
+// 7. strchr - string scanning operation
+
+#include<stdio.h>
+#include<string.h>
+#define size 20 
+
+int main()
+{
+    char str[size],ch,*ptr;
+    printf("Enter string: ");
+    fgets(str,size,stdin);
+    printf("Enter the character: ");
+    scanf("%c",&ch);
+    ptr = strchr(str,ch);
+    printf("%s\n",ptr);
+    return 0;
+}

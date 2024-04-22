@@ -1,0 +1,19 @@
+// 25.strndup - duplicate a specific number of bytes from a string
+
+#include<stdio.h>
+#include<string.h> 
+#define size 50 
+
+int main()
+{
+    char str[size];
+    char *len;
+    int n;
+    printf("Enter string 1:");
+    fgets(str,size,stdin);
+    printf("Enter the value of n:");
+    scanf("%d",&n);
+    len = strndup(str,n);
+    printf("string : %s\n",len);
+    return 0;   
+}

@@ -1,0 +1,17 @@
+// 23.strcspn - get the length of a complementary substring
+
+#include<stdio.h>
+#include<string.h> 
+#define size 50 
+
+int main()
+{
+    char str1[size],str2[size];
+    printf("Enter string 1:");
+    scanf("%s",str1);
+    printf("Enter string 2:");
+    scanf("%s",str2);
+    int len = strcspn(str1,str2);
+    printf("First matched character is at %d\n", len + 1);
+    return 0;   
+}

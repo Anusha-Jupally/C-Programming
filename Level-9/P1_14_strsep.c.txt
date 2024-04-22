@@ -1,0 +1,16 @@
+// 14.strsep - extract token from string
+
+#include<stdio.h>
+#include<string.h>
+
+int main() 
+{
+    char str[] = "Hello,Hi,Welcome";
+    char *token, *rest = str;
+
+    while((token = strsep(&rest, ",")) != NULL) 
+    {
+        printf("Token: %s\n", token);
+    }
+    return 0;
+}

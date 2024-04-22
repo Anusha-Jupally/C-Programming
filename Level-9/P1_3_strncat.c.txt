@@ -1,0 +1,20 @@
+// 3. strncat - concatenate two strings
+
+#include<stdio.h>
+#include<string.h>
+#define size 20 
+
+int main() 
+{
+    char src[size],dest[size];
+    int n;
+    printf("Enter the source string: ");
+    scanf("%s",src);
+    printf("Enter the destination string: ");
+    scanf("%s",dest);
+    printf("Enter n value: ");
+    scanf("%d",&n);
+    strncat(dest,src,n);
+    printf("The concatenated string : %s\n",dest);
+    return 0;
+}

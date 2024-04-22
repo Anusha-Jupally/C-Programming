@@ -1,0 +1,18 @@
+// 15.strspn - get length of a substring
+
+#include<stdio.h>
+#include<string.h> 
+#define size 50 
+
+int main()
+{
+    char str1[size],str2[size];
+    int len;
+    printf("Enter string1: ");
+    fgets(str1,size,stdin);
+    printf("Enter string2: ");
+    fgets(str2,size,stdin);
+    len = strspn(str1,str2);
+    printf("Matching length = %d\n",len);
+    return 0;   
+}

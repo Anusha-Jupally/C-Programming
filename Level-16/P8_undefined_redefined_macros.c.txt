@@ -1,0 +1,13 @@
+// 8.Undefining and Redefining Macros
+
+#include<stdio.h>
+#define PI 3.142
+#undef PI
+#define PI 3.142
+
+int main()
+{
+    printf("%f\n",PI);
+    
+    return 0;
+}

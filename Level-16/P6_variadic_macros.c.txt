@@ -1,0 +1,16 @@
+// 6. Variadic Macros
+
+#include<stdio.h> 
+#include<stdarg.h>
+#define PRINT_VALUES(...) printf(__VA_ARGS__)
+
+int main() 
+{
+    int num = 10;
+    double pi = 3.14159;
+    char message[] = "Hello, world!";
+    PRINT_VALUES("Number: %d\n", num);
+    PRINT_VALUES("Pi: %f\n", pi);
+    PRINT_VALUES("Message: %s\n", message);
+    return 0;
+}

@@ -1,0 +1,12 @@
+// 4.Stringizing
+
+#include <stdio.h>
+#define value(x) #x
+#define msg(y) #y
+
+int main() 
+{
+    printf("Stringized number: %s\n", value(10));
+    printf("Stringized message: %s\n", msg(Hello World));
+    return 0;
+}

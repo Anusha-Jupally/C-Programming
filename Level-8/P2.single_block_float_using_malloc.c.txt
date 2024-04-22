@@ -1,0 +1,18 @@
+// 2.Program to allocate a single block of float using malloc
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    float *ptr;
+    ptr=(float*)malloc(sizeof(float));
+    if(ptr == NULL)
+    {
+        printf("Memory allocation failed\n");
+        return 1;
+    }
+    scanf("%f",ptr);
+    printf("%.2f\n",*ptr);
+    free(ptr);
+}

@@ -1,0 +1,18 @@
+// 3.Program to allocate a single block of double using malloc
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    double *ptr;
+    ptr=(double*)malloc(sizeof(double));
+    if(ptr == NULL)
+    {
+        printf("Memory allocation failed\n");
+        return 1;
+    }
+    scanf("%lf",ptr);
+    printf("%lf\n",*ptr);
+    free(ptr);
+}

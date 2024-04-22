@@ -1,0 +1,31 @@
+//14. Program to allocate memory to a double structure pointer, store and access data using indirection
+
+#include<stdio.h>
+#include<stdlib.h>
+
+struct emp 
+{
+    int eid;
+    char ename[20];
+};
+
+int main()
+{
+    struct emp *e1,**e2;
+    e1 = (struct emp *)malloc(sizeof(struct emp));
+    printf("Enter Employee ID : ");
+    scanf("%d",&(e1->eid));
+    printf("Enter Employee name : ");
+    scanf("%s",e1->ename);
+    printf("\nDetails of Employees using single pointer:\n");
+    printf("Employee ID : %d\n",e1->eid);
+    printf("Emploee Name : %s\n",e1->ename);
+    printf("\n");
+    e2 = (struct emp **)malloc(sizeof(struct emp *));
+    e2 = &e1;
+    printf("\nDetails of Employees using  double pointer:\n");
+    printf("Employee ID : %d\n",(*e2)->eid);
+    printf("Employee Name : %s\n",(*e2)->ename);
+    
+    return 0;
+}

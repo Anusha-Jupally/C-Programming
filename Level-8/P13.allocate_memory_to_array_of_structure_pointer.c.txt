@@ -1,0 +1,43 @@
+// 13.Program to allocate memory to an array of structure pointers, store and access data using single indirection
+
+#include<stdio.h>
+#include<stdlib.h>
+#define size 3 
+
+struct emp 
+{ 
+    int eid;
+    char ename[20];
+};
+
+int main() 
+{
+    int i;
+    struct emp e[size], **ptr;
+    ptr = (struct emp **)malloc(sizeof(struct emp *)*size);
+    if(ptr == NULL)
+    {
+        printf("Memory allocation failed\n");
+        return 1;
+    }
+    printf("Enter details of employee\n");
+    for(i=0; i<size; i++)
+    {
+        printf("Enter Employee ID: ");
+        scanf("%d",&(e[i].eid));
+        printf("Enter Employee name: ");
+        scanf("%s",e[i].ename);
+    }
+    for(i=0; i<size; i++)
+    {
+        ptr[i] = (e+i);
+    }
+    printf("\n");
+    printf("Details of Employees are:\n");
+    for(i=0; i<size; i++)
+    {
+        printf("Employee ID : %d\n",ptr[i]->eid);
+        printf("Employee Name : %s\n",ptr[i]->ename);
+    }
+    return 0;
+}

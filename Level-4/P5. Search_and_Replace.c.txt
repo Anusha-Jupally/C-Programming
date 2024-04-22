@@ -1,0 +1,29 @@
+/* Search and replace letter ‘a’ in a string with letter ‘k’ in a file containing a plain text */
+
+#include<stdio.h>
+#include<stdlib.h>
+int main()
+{
+    char c;
+    char c1='a';
+    char c2='k';
+    int i;
+    FILE* fp;
+    fp=fopen("text.txt","r+");
+    if(fp==NULL)
+    {
+        printf("File not found\n");
+        exit(1);
+    }
+    for(c=fgetc(fp);c!=EOF;c=fgetc(fp))
+    {
+        if(c==c1)
+        {
+            fseek(fp,-1,SEEK_CUR);
+            fputc(c2,fp);
+            break;
+        }
+    }
+    fclose(fp);
+    return 0;
+}

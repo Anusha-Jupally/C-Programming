@@ -1,0 +1,29 @@
+/* Implement Linear searching algorithm */
+
+#include <stdio.h>
+#define size 20
+int main()
+{
+    int arr[size],key,i,n,flag = 0;
+    printf("Enter no of elements:");
+    scanf("%d",&n);
+    printf("Enter array elements:\n");
+    for(i=0;i<n;i++)
+        scanf("%d",&arr[i]);
+    printf("Enter the element to search:");
+    scanf("%d",&key);
+    
+    for(i=0;i<size;i++)
+    {
+        if(arr[i]==key)
+        {
+            flag =1;
+            break;
+        }
+    }
+    if(flag == 1)
+        printf("%d found at index %d",key,i);
+    else
+        printf("%d not found\n",key);
+     
+}

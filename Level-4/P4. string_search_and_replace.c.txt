@@ -1,0 +1,17 @@
+/* 4.Search and replace letter ‘a’ in a string with letter ‘k’ */
+
+#include<stdio.h>
+#define size 100
+int main()
+{
+    char s[size];
+    printf("Enter string:\n");
+    fgets(s,size,stdin);
+    int i;
+    for(i=0;s[i]!='\0';i++)
+    {
+        if(s[i]=='a')
+            s[i]='k';
+    }
+    printf("String after replacing 'a' with 'k' %s\n",s);
+}

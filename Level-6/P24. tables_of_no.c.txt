@@ -1,0 +1,20 @@
+/* 24.Program to print the tables of a given number from 1 to 10 */
+
+#include <stdio.h>
+void print_tables(int num)
+{
+    printf("Tables of %d is : \n",num);
+    int i;
+    for(i=1;i<=10;i++)
+    {
+        printf("%d x %d = %d\n",num,i,num*i);
+    }
+}
+int main()
+{
+    int num;
+    printf("Enter a number:\n");
+    scanf("%d",&num);
+    print_tables(num);
+    return 0;
+}

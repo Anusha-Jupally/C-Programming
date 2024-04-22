@@ -1,0 +1,29 @@
+/* 10.Program to check if a number is perfect cube or not */
+
+
+#include <stdio.h>
+int iscube(int num)
+{
+    int cube=0;
+    while(cube*cube*cube <= num)
+    {
+        if(cube*cube*cube == num)
+        {
+            return 1;
+        }
+        cube++;
+    }
+    return 0;
+    
+}
+int main()
+{
+    int num;
+    printf("Enter a number:");
+    scanf("%d",&num);
+    if(iscube(num))
+        printf("%d is a perfect cube.\n",num);
+    else
+         printf("%d is not a perfect cube.\n",num);
+    return 0;
+}

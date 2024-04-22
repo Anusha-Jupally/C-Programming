@@ -1,0 +1,29 @@
+/* 34.Program to find LCM and HCF */
+
+#include<stdio.h>
+int find_hcf(int n1,int n2)
+{
+    while(n2!=0)
+    {
+        int temp=n2;
+        n2=n1%n2;
+        n1=temp;
+    }
+    return n1;
+}
+int find_lcm(int n1,int n2)
+{
+    int lcm=(n1*n2)/find_hcf(n1,n2);
+    return lcm;
+}
+int main()
+{
+    int n1,n2;
+    printf("Enter two numbers:\n");
+    scanf("%d %d",&n1,&n2);
+    int hcf=find_hcf(n1,n2);
+    int lcm=find_lcm(n1,n2);
+    printf("HCF of %d and %d = %d\n",n1,n2,hcf);
+    printf("LCM of %d and %d = %d\n",n1,n2,lcm);
+    return 0;
+}

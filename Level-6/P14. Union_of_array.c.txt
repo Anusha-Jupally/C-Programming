@@ -1,0 +1,45 @@
+/* 14.Program to create an union of two integer arrays */
+
+#include <stdio.h>
+void unionarray(int arr1[],int n1,int arr2[],int n2,int res[])
+{
+    int i,j;
+    for(i=0;i<n1;i++)
+    {
+        res[i]=arr1[i];
+    }
+    for(j=0;j<n2;j++)
+    {
+        res[n1+j]=arr2[j];
+    }
+    
+}
+void print(int arr[],int n)
+{
+    int i;
+    for(i=0;i<n;i++)
+        printf("%d ",arr[i]);
+}
+int main()
+{
+    int n1,n2,i;
+    printf("Enter no of elements in array1:\n");
+    scanf("%d",&n1);
+    int arr1[n1];
+    printf("Enter array 1:\n");
+    for(i=0;i<n1;i++)
+        scanf("%d",&arr1[i]);
+        
+    printf("Enter no of elements in array1:\n");
+    scanf("%d",&n2);
+    int arr2[n2];
+    printf("Enter array 2:\n");
+    for(i=0;i<n2;i++)
+        scanf("%d",&arr2[i]);
+    
+    int res[n1+n2];
+    unionarray(arr1,n1,arr2,n2,res);
+    printf("Concatenated array:\n");
+    print(res,n1+n2);
+    return 0;
+}

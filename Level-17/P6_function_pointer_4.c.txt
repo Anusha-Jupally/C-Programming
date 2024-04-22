@@ -1,0 +1,39 @@
+// typdef int fptr(int, int); fptr *fun(fptr *)
+
+#include <stdio.h>
+
+
+typedef int (*fptr)(int, int);
+
+
+int add(int a, int b) 
+{
+    return a + b;
+}
+
+int sub(int a, int b) 
+{
+    return a - b;
+}
+
+fptr* fun(fptr *func_ptr) 
+{
+    if(*func_ptr == add) 
+    {
+        *func_ptr = sub;
+    } 
+    else if(*func_ptr == sub) 
+    {
+        *func_ptr = add;
+    }
+    return func_ptr;
+}
+
+int main() 
+{
+    fptr func = add;
+    printf("Result: %d\n", func(5, 3));
+    fptr *updated_func_ptr = fun(&func);
+    printf("Result after fun: %d\n", (*updated_func_ptr)(5, 3));
+    return 0;
+}

@@ -1,0 +1,42 @@
+// typedef int fptr(int, int); fptr *fp[10];
+
+#include <stdio.h>
+
+typedef int fptr(int,int);
+int sum(int a,int b);
+int sub(int a,int b);
+int mul(int a,int b);
+int division(int a,int b);
+
+int main()
+{
+    int a,b;
+    printf("Enter two values: ");
+    scanf("%d%d",&a,&b);
+    fptr *fp[10] = {sum,sub,mul,division};
+    printf("sum  = %d\n",fp[0](a,b));
+    printf("Subtaction = %d\n",fp[1](a,b));
+    printf("Multiplication = %d\n",fp[2](a,b));
+    printf("Division = %d\n",fp[3](a,b));
+    return 0;
+}
+
+int sum(int a,int b)
+{
+    return a+b;
+}
+
+int sub(int a,int b)
+{
+    return a-b;
+}
+
+int mul(int a,int b)
+{
+    return a*b;
+}
+
+int division(int a,int b)
+{
+    return a/b;
+}

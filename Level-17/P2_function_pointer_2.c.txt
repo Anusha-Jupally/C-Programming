@@ -1,0 +1,22 @@
+//2. typedef int fptr(int, int); fptr *fp;
+
+#include <stdio.h>
+
+typedef int fptr(int, int);
+int sum(int a, int b);
+
+int main() 
+{
+    int a, b;
+    printf("Enter two numbers:\n");
+    scanf("%d %d",&a,&b);
+    fptr *fp;
+    fp = sum;
+    int result = fp(a, b);
+    printf("Sum of %d and %d is: %d\n", a, b, result);
+    return 0;
+}
+int sum(int a, int b) 
+{
+    return a + b;
+}

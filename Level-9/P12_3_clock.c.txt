@@ -1,0 +1,12 @@
+// 3. clock - report CPU time used
+
+#include <stdio.h>
+#include <time.h>
+ 
+int main ()
+{
+    clock_t t;
+    t = clock();
+    printf("%ld\n",t);
+    return(0);
+}

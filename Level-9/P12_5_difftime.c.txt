@@ -1,0 +1,17 @@
+//5. difftime - compute the difference between two calendar time values
+
+#include <stdio.h>
+#include <time.h>
+#include <unistd.h>
+ 
+int main ()
+{
+    time_t t1,t2;
+    double diff_t;
+    time(&t1);
+    sleep(5);
+    time(&t2);
+    diff_t = difftime(t2,t1);
+    printf("Execution time = %f\n", diff_t);
+    return 0;
+}

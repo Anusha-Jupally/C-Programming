@@ -1,0 +1,34 @@
+// 8.mktime - convert broken-down time into time since the Epoch
+
+// 9.strftime - convert date and time to a string
+
+
+#include <stdio.h>
+#include <time.h>
+
+int main () 
+{
+   int ret;
+   struct tm p;
+   char buffer[80];
+
+   p.tm_year = 2001 - 1900;
+   p.tm_mon = 7 - 1;
+   p.tm_mday = 4;
+   p.tm_hour = 0;
+   p.tm_min = 0;
+   p.tm_sec = 1;
+   p.tm_isdst = -1;
+
+   ret = mktime(&p);
+   if( ret == -1 ) 
+   {
+      printf("Error: unable to make time using mktime\n");
+   } 
+   else 
+   {
+      strftime(buffer, sizeof(buffer), "%c", &p);
+      printf("%s\n",buffer);
+   }
+   return(0);
+}

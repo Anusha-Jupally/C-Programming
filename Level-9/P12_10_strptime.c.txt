@@ -1,0 +1,14 @@
+// 10.strptime - date and time conversion
+
+#include<stdio.h>
+#include<time.h>
+
+int main () 
+{
+    int ret;
+    struct tm p;
+    strptime("04/19/24 15:15:05", "%D %T",&p);
+    printf("tm_sec  =%3d\n", p.tm_sec);                                     
+    printf("tm_min  =%3d\n", p.tm_min);
+    return(0);
+}

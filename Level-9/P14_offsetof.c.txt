@@ -1,0 +1,14 @@
+//14. offsetof - offset of a structure member
+
+#include<stdio.h>
+#include<stddef.h>
+struct emp 
+{
+    char name[10];
+    int age;
+};
+int main()
+{
+    printf("Offset name = %ld\n",offsetof(struct emp, name));
+    printf("Offset age= %ld\n",offsetof(struct emp, age));
+}

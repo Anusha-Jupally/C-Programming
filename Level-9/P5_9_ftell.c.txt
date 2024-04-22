@@ -1,0 +1,20 @@
+// 9. ftell - return a file offset in a stream
+
+#include <stdio.h>  
+
+void main ()
+{  
+    FILE *fp;  
+    int length;  
+    fp = fopen("file1.txt", "r");
+    if(fp == NULL)
+    {
+        printf("Error in opening file\n");
+        exit(1);
+    }
+    fseek(fp, 0, SEEK_END);  
+    length = ftell(fp);  
+    fclose(fp);  
+    printf("Size of file: %d bytes", length);  
+    
+}  

@@ -1,0 +1,19 @@
+// 6.fflush - flush a stream
+
+#include <stdio.h>
+
+int main() 
+{
+    FILE *file = fopen("output.txt", "w");
+    if (file == NULL) 
+    {
+        printf("Cannot open file");
+        return 1;
+    }
+    fprintf(file, "Hello, ");
+    fprintf(file, "world!");
+    fflush(file);
+    fclose(file);
+
+    return 0;
+}

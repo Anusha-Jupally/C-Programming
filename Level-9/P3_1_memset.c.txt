@@ -1,0 +1,20 @@
+//1. memset - set bytes in memory
+
+#include<stdio.h>
+#include<string.h> 
+#define size 50 
+
+int main()
+{
+    char str[size],ch;
+    int n;
+    printf("Enter string: ");
+    fgets(str,size,stdin);
+    printf("Enter the character to fill: ");
+    scanf("%c",&ch);
+    printf("Enter n value: ");
+    scanf("%d",&n);
+    memset(str,ch,n);
+    printf("String after memset() : %s\n",str);
+    return 0;   
+}

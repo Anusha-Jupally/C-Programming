@@ -1,0 +1,16 @@
+//1. malloc - a memory allocator
+
+#include<stdio.h>
+#include<stdlib.h>
+
+int main() 
+{
+    int *ptr;
+    ptr = (int *)malloc(sizeof(int));
+    if(ptr == NULL)
+        printf("Memory allocation failed\n");
+    else
+        printf("Memory allocated successfully\n");
+    free(ptr);
+    return 0;
+}

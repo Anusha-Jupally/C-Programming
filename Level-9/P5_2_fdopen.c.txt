@@ -1,0 +1,28 @@
+// 2.fdopen - associate a stream with a file descriptor
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
+
+int main() 
+{
+    int fd = open("output.txt",  O_RDWR | O_CREAT);
+    if (fd == -1) 
+    {
+        printf("Error\n");
+        exit(1);
+    }
+    FILE *stream = fdopen(fd, "w");
+    if (stream == NULL) 
+    {
+        printf("Cannot open file\n");
+        close(fd);
+        exit(1);
+    }
+    fprintf(stream, "Hello, world!\n");
+    fclose(stream);
+
+    return 0;
+}

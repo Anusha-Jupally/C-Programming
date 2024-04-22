@@ -1,0 +1,18 @@
+//4.memmove - copy memory area
+
+#include<stdio.h>
+#include<string.h> 
+#define size 50 
+
+int main()
+{
+    char src[size],des[size];
+    int n;
+    printf("Enter source string: ");
+    fgets(src,size,stdin);
+    printf("Enter n value: ");
+    scanf("%d",&n);
+    memmove(des,src,n);
+    printf("String after memmove() : %s\n",des);
+    return 0;   
+}

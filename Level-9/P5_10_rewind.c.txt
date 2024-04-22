@@ -1,0 +1,24 @@
+// 10. rewind - reset the file position indicator in a stream
+
+#include<stdio.h>  
+void main()
+{  
+    FILE *fp;  
+    char c;  
+    fp=fopen("file1.txt","r");
+     if(fp == NULL)
+    {
+        printf("Error in opening file\n");
+        exit(1);
+    }
+    while((c=fgetc(fp))!=EOF)
+    {  
+        printf("%c",c);  
+    }  
+    rewind(fp); 
+    while((c=fgetc(fp))!=EOF)
+    {  
+        printf("%c",c);  
+    }  
+    fclose(fp);    
+}    

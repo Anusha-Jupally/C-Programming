@@ -1,0 +1,25 @@
+// 3. bcmp - compare byte sequences
+
+#include <stdio.h>
+#include <strings.h>
+#define size 20
+
+int main() {
+    char str1[size],str2[size];
+    printf("Enter string 1:\n");
+    fgets(str1,size,stdin);
+    printf("Enter string 2:\n");
+    fgets(str2,size,stdin);
+    int n;
+    printf("Enter value of n:\n");
+    scanf("%d",&n);
+    int result;
+    result = bcmp(str1, str2, n); 
+    
+    if (result == 0) 
+        printf("The blocks of memory are identical.\n");
+    else
+        printf("The blocks of memory are different.\n");
+
+    return 0;
+}

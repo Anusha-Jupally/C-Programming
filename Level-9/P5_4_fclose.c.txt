@@ -1,0 +1,19 @@
+// 4. fclose - close a stream
+
+
+#include<stdio.h>
+#include<stdlib.h>
+
+int main()
+{
+    FILE *fp;
+    fp = fopen("file1.txt","w");
+    if(fp == NULL)
+    {
+        printf("Enable to create file\n");
+        exit(1);
+    }
+    printf("File opened successfully\n");
+    fclose(fp);
+    return 0;   
+}

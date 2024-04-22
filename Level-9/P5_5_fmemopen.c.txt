@@ -1,0 +1,19 @@
+// 5. fmemopen - open a memory buffer stream  
+
+#include<stdio.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <unistd.h>
+#define SIZE 50 
+
+int main()
+{
+    FILE *fp;
+    char buffer[SIZE];
+    fp = fmemopen(buffer,SIZE,"r");
+    buffer[0] = 'b';
+    printf("%s\n",buffer);
+    
+    fclose(fp);
+    return 0;
+}

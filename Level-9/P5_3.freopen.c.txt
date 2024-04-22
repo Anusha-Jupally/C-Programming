@@ -1,0 +1,17 @@
+// 3.freopen - open a stream 
+
+#include<stdio.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <unistd.h>
+
+int main()
+{
+    FILE *fp;
+    printf("Hello World!\n");
+    fp = freopen("file1.txt","w+",stdout);
+    printf("Wecome\n");
+    printf("%d",10);
+    fclose(fp);
+    return 0;
+}

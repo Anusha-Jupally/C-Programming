@@ -1,0 +1,21 @@
+// 12.fsetpos - set current file position
+
+#include<stdio.h>
+#include<stdlib.h>
+int main () 
+{
+    FILE *fp;
+    fpos_t position;
+    fp = fopen("file1.txt","w+");
+    if(fp == NULL)
+    {
+        printf("Error in opening file\n");
+        exit(1);
+    }
+    fgetpos(fp, &position);
+    fputs("Hello World!", fp);
+    fsetpos(fp, &position);
+    fputs("Overriden the previous content", fp);
+    fclose(fp);
+    return(0);
+}

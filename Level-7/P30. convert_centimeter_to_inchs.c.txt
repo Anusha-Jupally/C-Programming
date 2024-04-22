@@ -1,0 +1,16 @@
+/* 30.Program to convert to “centimeters” to “inches” */
+
+#include <stdio.h>
+double cent_to_inch(int cent)
+{
+    double inch_res=cent*0.3937;
+    return inch_res;
+}
+int main()
+{
+    int cent;
+    printf("Enter centemeter:\n");
+    scanf("%d",&cent);
+    double inch=cent_to_inch(cent);
+    printf("%d cm = %.2f inchs\n",cent,inch);
+}

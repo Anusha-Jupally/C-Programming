@@ -1,0 +1,17 @@
+/* 31.Program to convert seconds to microseconds */
+
+#include <stdio.h>
+int sec_to_microsec(int sec)
+{
+    int microsec;
+    microsec=sec*1000000;
+    printf("%d seconds = %d microseconds\n",sec,microsec);
+}
+int main()
+{
+    int sec;
+    printf("Enter seconds:\n");
+    scanf("%d",&sec);
+    sec_to_microsec(sec);
+    return 0;
+}

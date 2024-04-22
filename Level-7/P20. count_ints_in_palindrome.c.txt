@@ -1,0 +1,43 @@
+/* 20. Program to count number of integers which are palnidrome numbers in an array of integers */
+
+#include <stdio.h>
+#define size 50
+int ispalindrome(int n)
+{
+    int rev=0,sum=0;
+    int num=n;
+    while(n > 0)
+    {
+        int sum=n%10;
+        rev=rev*10+sum;
+        n=n/10;
+    }
+    return num==rev;
+}
+int count_palindrome(int arr[],int n)
+{
+   int count=0,i;
+   for(i=0;i<n;i++)
+   {
+        if(ispalindrome(arr[i]))
+        {
+            count++;
+        }
+   }
+   return count;
+   
+}
+int main()
+{
+    int arr[size],i,n;
+    printf("Enter the no of elements:\n");
+    scanf("%d",&n);
+    
+    printf("Enter the elements:\n");
+    for(i=0;i<n;i++)
+        scanf("%d",&arr[i]);
+        
+    int count=count_palindrome(arr,n);
+    printf("Count of palindrome numbers %d\n",count);
+    return 0;
+}

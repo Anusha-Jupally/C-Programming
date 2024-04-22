@@ -1,0 +1,17 @@
+/* 7. Program to find the power of a number; Input : Base, power Output : (Base)^Power */
+
+#include <stdio.h>
+
+int main()
+{
+    int base,expp,res=1;
+    printf("Enter base and expp:\n");
+    scanf("%d %d",&base,&expp);
+    while(expp!=0)
+    {
+        res=res*base;
+        expp--;
+    }
+    printf("Power of Integer is %d.\n",res);
+    return 0;
+}

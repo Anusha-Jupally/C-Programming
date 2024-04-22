@@ -1,0 +1,23 @@
+/* 23. Program to find all the divisors of a given number */
+
+#include <stdio.h>
+void divisor(int num)
+{
+    printf("Divisor of %d are : ",num);
+    int i;
+    for(i=1;i<=num;i++)
+    {
+        if(num%i==0)
+        {
+            printf("%d ",i);
+        }
+    }
+}
+int main()
+{
+    int num;
+    printf("Enter a number:\n");
+    scanf("%d",&num);
+    divisor(num);
+    return 0;
+}

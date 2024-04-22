@@ -1,0 +1,29 @@
+/* 29.Program to find the larget element and it’s position in an array */
+
+#include <stdio.h>
+void largest_no(int arr[],int n)
+{
+   int max=arr[0],pos=0,i;
+   for(i=1;i<n;i++)
+   {
+       if(arr[i]>max)
+       {
+           max=arr[i];
+           pos=i;
+       }
+   }
+   printf("The largest element in that array is %d and position is %d",max,pos);
+   
+}
+int main()
+{
+    int n,i;
+    printf("Enter no of elements:\n");
+    scanf("%d",&n);
+    int arr[n];
+    printf("Enter array elements:\n");
+    for(i=0;i<n;i++)
+        scanf("%d",&arr[i]);
+    largest_no(arr,n);
+    return 0;
+}

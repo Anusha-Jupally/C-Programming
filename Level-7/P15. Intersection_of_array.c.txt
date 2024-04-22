@@ -1,0 +1,35 @@
+/* 15.Program to create an intersection of two integer arrays */
+
+
+#include <stdio.h>
+#define size 50
+
+void intersection(int arr1[],int arr2[],int n)
+{
+    int i,j;
+    for(i=0;i<n;i++)
+    {
+        for(j=0;j<n;j++)
+        {
+            if(arr1[i]==arr2[j])
+                printf("%d ",arr1[i]);
+        }
+    }
+}
+int main()
+{
+    int arr1[size],arr2[size],i,n;
+    printf("Enter the no of elements:\n");
+    scanf("%d",&n);
+    
+    printf("Enter array1:\n");
+    for(i=0;i<n;i++)
+        scanf("%d",&arr1[i]);
+        
+    printf("Enter array2:\n");
+    for(i=0;i<n;i++)
+        scanf("%d",&arr2[i]);
+        
+    intersection(arr1,arr2,n);
+    return 0;
+}

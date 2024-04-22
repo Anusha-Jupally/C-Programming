@@ -1,0 +1,30 @@
+/* 27.Program to reverse the contents of an integer array */
+
+
+#include <stdio.h>
+void reverse_array(int arr[],int n)
+{
+    int rev[n],i,j=0;
+    for(i=n-1;i>=0;i--)
+    {
+        rev[j]=arr[i];
+        j++;
+    }
+    printf("Reversed array:\n");
+    for(i=0;i<n;i++)
+    {
+        printf("%d ",rev[i]);
+    }
+}
+int main()
+{
+    int n,i;
+    printf("Enter no of elements:\n");
+    scanf("%d",&n);
+    int arr[n];
+    printf("Enter array elements:\n");
+    for(i=0;i<n;i++)
+        scanf("%d",&arr[i]);
+    reverse_array(arr,n);
+    return 0;
+}

@@ -1,0 +1,39 @@
+// 20. Implement Shell sort algorithm to sort an array in decreasing way
+
+
+#include <stdio.h>
+#define size 10
+
+void shellsort(int arr[],int n)
+{
+    int i,j,space;
+    for(space=n/2; space>0; space=space/2)
+    {
+        for(i=space; i<n; i++)
+        {
+            int temp=arr[i];
+            for(j=i; j>=space && arr[j-space]<temp; j=j-space)
+            {
+                arr[j]=arr[j-space];
+            }
+            arr[j]=temp;
+        }
+    }
+}
+
+int main()
+{
+    int arr[size],n,i;
+    printf("Enter no of elements:\n");
+    scanf("%d",&n);
+    printf("Enter the elements:\n");
+    for(i=0; i<n; i++)
+        scanf("%d",&arr[i]);
+    shellsort(arr,n);
+    printf("Elements sorted in descending order:\n");
+    for(i=0; i<n; i++)
+    {
+        printf("%d ",arr[i]);
+    }
+    return 0;
+}

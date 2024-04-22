@@ -1,0 +1,61 @@
+//13. Implement counting sort algorithm to sort an array in increasing way
+
+#include<stdio.h>
+#define size 10
+
+void countingsort(int arr[],int n)
+{
+    int i,count[size],max,a[size];
+    max = arr[0];
+    for(i=1; i<n;i++)  // to find the max element
+    {
+        if(arr[i] > max)
+        {
+            max = arr[i];
+        }
+    }
+    
+    for(i=0; i<=max; i++) // initilize count array to zero
+    {
+        count[i]=0;
+    }
+    
+    for(i=0; i<n; i++) // Count the occurrences of each element
+    {
+        count[arr[i]]++;
+    }
+    
+    for(i=1; i<=max; i++) // Modify count array to store the positions
+    {
+        count[i]=count[i]+count[i-1];
+    }
+    
+    for(i=n-1; i>=0; i--) // Build the output array
+    {
+        a[count[arr[i]]-1] = arr[i];
+        count[arr[i]]--;
+    }
+    
+    for(i=0; i<n; i++) // sorted array elements stored in original array
+    {
+        arr[i]=a[i];
+    }
+}
+
+
+
+int main()
+{
+    int n,arr[size],i;
+    printf("Enter no of elements:\n");
+    scanf("%d",&n);
+    printf("Enter the elements:\n");
+    for(i=0; i<n; i++)
+        scanf("%d",&arr[i]);
+    countingsort(arr, n);
+    printf("Elements in ascending order:\n");
+    for(i=0; i<n; i++)
+        printf("%d ",arr[i]);
+    printf("\n");
+    return 0;
+}

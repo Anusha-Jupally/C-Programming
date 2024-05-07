@@ -1,0 +1,32 @@
+//17. Program to count number of new lines in a string or array of strings 
+
+#include<stdio.h>
+
+int new_lines(char str[][10],int n)
+{
+    int i,j,count=0;
+    for(i=0; i<n; i++)
+    {
+        for(j=0; str[i][j]!='\0'; j++)
+        {
+            if(str[i][j] == '\n')
+            count++;
+        }
+    }
+    return count;
+}
+int main()
+{
+    char str[4][10];
+    int i,count;
+    printf("Enter strings:\n");
+    for(i=0; i<4; i++)
+    {
+        fgets(str[i],10,stdin);
+    }
+    count=new_lines(str,4);
+    printf("Count of new lines = %d\n",count);
+    
+    return 0;
+}
+

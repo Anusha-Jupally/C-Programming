@@ -1,0 +1,26 @@
+// 22. Program to count number of words in a string where each word is separated by space
+
+#include<stdio.h>
+#define size 20 
+
+int count_words(char *str)
+{
+    int i,count = 0;
+    for(i=0; str[i] != '\0'; i++)
+    {
+        if(str[i] == ' ')
+        count++;
+    }
+    count++;
+    return count;
+}
+int main()
+{
+    char str[size];
+    int count;
+    printf("Enter string: ");
+    fgets(str,size,stdin);
+    count = count_words(str);
+    printf("Number of words in a string is: %d\n",count);
+    return 0;
+}

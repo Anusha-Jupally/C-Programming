@@ -1,0 +1,28 @@
+// 29. Program to remove any leading spaces in a string or array of strings
+
+#include <stdio.h>
+#include <string.h>
+#define size 50
+
+void removeLeadingSpaces(char str[]) 
+{
+    int i, j = 0;
+    int len = strlen(str);
+    for(i = 0; i < len && str[i] == ' '; i++);
+    for(; i < len; i++, j++) 
+    {
+        str[j] = str[i];
+    }
+    str[j] = '\0'; 
+}
+
+int main() 
+{
+    char str[size];
+    printf("Enter string:");
+    fgets(str,size,stdin);
+    removeLeadingSpaces(str);
+    printf("After removing leading spaces :%s\n", str);
+
+    return 0;
+}

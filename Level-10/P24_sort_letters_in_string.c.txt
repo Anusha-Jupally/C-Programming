@@ -1,0 +1,35 @@
+// 24. Program to sort the letters in a string as per alphabetical order
+
+#include<stdio.h>
+#include<string.h>
+#define size 20 
+
+void sort_letters(char *str)
+{
+    int i,j,len;
+    char temp;
+    len = strlen(str)-1;
+    for(i=0; i<len; i++)
+    {
+        for(j=i+1; j<len; j++)
+        {
+            if(str[i] > str[j])
+            {
+                temp = str[i];
+                str[i] = str[j];
+                str[j] = temp;
+            }
+        }
+    }
+}
+
+int main() 
+{
+    char str[size];
+    printf("Enter the string: ");
+    fgets(str,size,stdin);
+    sort_letters(str);
+    printf("After sorting : %s\n",str);
+    return 0;
+}
+

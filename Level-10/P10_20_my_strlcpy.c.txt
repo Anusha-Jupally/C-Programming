@@ -1,0 +1,28 @@
+// 20.strlcpy - size-bounded string copying
+
+#include<stdio.h>
+#include<string.h>
+#define N 100
+
+void my_strlcpy(char *des,char *src,int n)
+{
+    int i;
+    for(i=0; i<n; i++)
+    {
+        des[i] = src[i];
+    }
+    des[i] = '\0';
+}
+int main() 
+{
+    char src[N],dest[N];
+    int n;
+    printf("Enter source string: ");
+    fgets(src,N,stdin);
+    printf("Enter value of n:");
+    scanf("%d",&n);
+    my_strlcpy(dest,src,n-1);
+    printf("After copying  : %s\n",dest);
+    return 0;
+}
+

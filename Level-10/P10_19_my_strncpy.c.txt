@@ -1,0 +1,28 @@
+// 19.strncpy - copy fixed length string, returning a pointer to the array end
+
+#include<stdio.h>
+#include<string.h>
+#define N 100
+
+void my_strncpy(char *des,char *src,int n)
+{
+    int i;
+    for(i=0; i<n; i++)
+    {
+        des[i] = src[i];
+    }
+    des[i] = '\0';
+}
+int main() 
+{
+    char src[N],dest[N];
+    int n;
+    printf("Enter source string: ");
+    fgets(src,N,stdin);
+    printf("Enter value of n:");
+    scanf("%d",&n);
+    my_strncpy(dest,src,n);
+    printf("After copying  : %s\n",dest);
+    return 0;
+}
+

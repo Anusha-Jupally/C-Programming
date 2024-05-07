@@ -1,0 +1,83 @@
+// 15.Program to replace occurance of word “paper” and delete in all strings in an array of strings.
+
+
+#include <stdio.h>
+#define size 100
+#define max 100
+
+void replaceAndDelete(char strs[][size],int n,const char *find) 
+{
+    int len1=0,len2=0,i,j,k;
+    for(k = 0; k < n; k++) 
+    {
+        char *str = strs[k];
+        while(str[len1] != '\0') 
+        {
+            len1++; 
+        }
+        while(find[len2] != '\0') 
+        {
+            len2++; 
+        }
+        for(i = 0; i < len1 - len2 + 1; ) 
+        {
+            int match = 1;
+            for(j = 0; j < len2; j++) 
+            {
+                if(str[i + j] != find[j]) 
+                {
+                    match = 0;
+                    break;
+                }
+            }
+            if(match) 
+            {
+                for(j = i; j < len1 - len2; j++) 
+                {
+                    str[j] = str[j + len2];
+                }
+                len1 -= len2; 
+            } 
+            else 
+            {
+                i++; 
+            }
+        }
+        str[len1] = '\0';
+    }
+}
+
+int main() 
+{
+    char strs[max][size],find[size]="paper";
+    int n,i;
+    printf("Enter number of strings:");
+    scanf("%d",&n);
+    getchar();
+    printf("Enter strings:\n");
+    for(i =0; i < n; i++)
+    {
+        fgets(strs[i], sizeof(strs[i]), stdin);
+        int len = 0;
+        while(strs[i][len] != '\0') 
+        {
+            if(strs[i][len] == '\n') 
+            {
+                strs[i][len] = '\0';
+                break;
+            }
+            len++;
+        }
+    }
+
+    replaceAndDelete(strs,n,find);
+
+    printf("\nReplaced strings:\n");
+    for(i = 0; i < n; i++) 
+    {
+        printf("%s\n",strs[i]);
+    }
+    return 0;
+}
+
+

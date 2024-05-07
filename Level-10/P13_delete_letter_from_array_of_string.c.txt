@@ -1,0 +1,36 @@
+// 13. Program to search letter ‘a’ and delete it in an array of strings
+
+#include<stdio.h>
+#include<string.h>
+void delete_letter(char str[][10],int n,char ch)
+{
+    int i,j;
+    int shift;
+    for(i=0; i<n; i++)
+    {
+        shift=0;
+        int len=strlen(str[i]);
+        for(j=0; j<len; j++)
+        {
+            if(str[i][j] == ch)
+                shift++;
+            else
+                str[i][j-shift]=str[i][j];
+        }
+        str[i][len - shift]= '\0';
+    }
+   
+}
+int main()
+{
+    char str[4][10];
+    int i;
+    printf("Enter strings:\n");
+    for(i=0; i<4; i++)
+        scanf("%s",str[i]);
+    delete_letter(str,4,'a');
+    printf("String after deleting 'a' : \n");
+    for(i=0; i<4; i++)
+        printf("%s\n",str[i]);
+    return 0;
+}

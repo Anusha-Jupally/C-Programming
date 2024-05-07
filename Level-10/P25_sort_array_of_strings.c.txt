@@ -1,0 +1,48 @@
+// 25. Program to sort the strings in an array of strings similar to a dictionary
+
+#include<stdio.h>
+#include<string.h>
+#define size 50 
+#define max 10
+
+void sort_strings(char str[][50],int n)
+{
+    int i,j,ret;
+    char temp[max];
+    for(i=0; i<n; i++)
+    {
+        for(j=i+1; j<n; j++)
+        {
+           ret = strcmp(str[i],str[j]);
+           if(ret > 0)
+           {
+               strcpy(temp,str[i]);
+               strcpy(str[i],str[j]);
+               strcpy(str[j],temp);
+           }
+        }
+    }
+}
+
+int main()
+{
+    char str[max][size];
+    int i,count,n;
+    printf("Enter number of strings:\n");
+    scanf("%d",&n);
+    printf("Enter strings:\n");
+    for(i=0; i<n; i++)
+    {
+        scanf("%s",str[i]);
+    }
+    n = sizeof(str)/sizeof(str[0]);
+    sort_strings(str,n);
+    printf("Strings after sorting:\n");
+    for(i=0; i<n; i++)
+    {
+        printf("%s\n",str[i]);
+    }
+    
+    return 0;
+}
+

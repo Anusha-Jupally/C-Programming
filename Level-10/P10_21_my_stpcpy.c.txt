@@ -1,0 +1,29 @@
+// 21.stpcpy - copy a string and return a pointer to the end of the result
+
+#include<stdio.h>
+#include<string.h>
+#define N 100  
+
+char *my_stpcpy(char *dest,char *src)
+{
+    int i;
+    char *ptr = dest;
+    for(i=0; src[i] != '\0'; i++)
+    {
+        ptr[i] = src[i];
+    }
+    ptr[i] = '\0';
+    return ptr;
+}
+
+int main()
+{
+    char src[N],dest[N];
+    int n;
+    printf("Enter source string: ");
+    fgets(src,N,stdin);
+    char *ptr = my_stpcpy(dest,src);
+    printf("After copying : %s\n",ptr);
+    return 0;
+}
+

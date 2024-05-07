@@ -1,0 +1,40 @@
+// 15.strspn - get length of a substring
+
+#include <stdio.h>
+#include <string.h>
+#define N 100
+
+size_t my_strspn(const char *str, const char *accept) 
+{
+    const char *ptr;
+    int count = 0;
+    while(*str) 
+    {
+        ptr = accept;
+        while(*ptr) 
+        {
+            if(*ptr == *str) 
+            {
+                count++;
+                break;
+            }
+            ptr++;
+        }
+        if (!*ptr)
+            break;
+        str++;
+    }
+    return count;
+}
+
+int main() 
+{
+    char str[N], accept[N];
+    printf("Enter the string: ");
+    fgets(str, N, stdin);
+    printf("Enter the set of acceptable characters: ");
+    fgets(accept, N, stdin);
+    int length = my_strspn(str, accept);
+    printf("Length of only characters from accept: %d\n", length);
+    return 0;
+}

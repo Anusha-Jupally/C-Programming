@@ -1,0 +1,55 @@
+// 32. Program to find out smallest word in an english statement
+
+
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+#define size 50
+
+int smallest_string(char str[],char smallest[]) 
+{
+    //char largest[size];
+    int count = 0, min = size,i,j,index = 0,len;
+    len = strlen(str);
+    for(i = 0; i < len; i++)
+    {
+        if(str[i] != ' ')
+        {
+            count++;
+        }
+        else
+        {
+            if(count <  min && count > 0)
+            {
+                min = count;
+                index = i - min;
+            }
+            count = 0;
+        }
+        
+    }
+    if(count < min && count > 0)
+    {
+        min = count;
+        index = len - count;
+    }
+    j = 0;
+    for(i = index;i < index+min; i++)
+    {
+        smallest[j] = str[i];
+        j++;
+    }
+    smallest[j] = '\0';
+    return min;
+}
+
+int main() 
+{
+    char str[size],smallest[size];
+    printf("Enter string:");
+    fgets(str,size,stdin);
+    smallest_string(str,smallest);
+    
+    printf("Smallest string is : %s",smallest);
+    return 0;
+}

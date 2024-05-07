@@ -1,0 +1,50 @@
+// 26. Program to sort all characters in all strings in an array of strings 
+
+#include<stdio.h>
+#include<string.h>
+#define size 50
+#define max 10
+
+void sort_array_strings(char str[][50],int n)
+{
+    int i,j,k,len;
+    char temp;
+    for(i=0; i<n; i++)
+    {
+        len = strlen(str[i]);
+        for(j=0; j<len; j++)
+        {
+           for(k=j+1; k<len; k++)
+           {
+               if(str[i][j] > str[i][k])
+               {
+                   temp = str[i][j];
+                   str[i][j] = str[i][k];
+                   str[i][k] = temp;
+               }
+           }
+        }
+    }
+}
+
+
+int main()
+{
+    char str[max][size];
+    int i,count,n;
+    printf("Enter the value of n:\n");
+    scanf("%d",&n);
+    printf("Enter strings:\n");
+    for(i=0; i<n; i++)
+    {
+        scanf("%s",str[i]);
+    }
+    sort_array_strings(str,n);
+    printf("Strings after sorting:\n");
+    for(i=0; i<4; i++)
+    {
+        printf("%s\n",str[i]);
+    }
+    return 0;
+}
+

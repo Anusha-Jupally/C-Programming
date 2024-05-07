@@ -1,0 +1,68 @@
+// 14.Program to replace occurance of word “paper” and delete it in a string
+
+
+#include <stdio.h>
+#define size 100
+
+void replaceAndDelete(char *str, const char *find) 
+{
+    int len1=0,len2=0,i,j;
+    while(str[len1] != '\0') 
+    {
+        len1++; 
+    }
+    while(find[len2] != '\0') 
+    {
+        len2++; 
+    }
+    for(i = 0; i < len1 - len2 + 1; ) 
+    {
+        int match = 1;
+        for(j = 0; j < len2; j++) 
+        {
+            if(str[i + j] != find[j]) 
+            {
+                match = 0;
+                break;
+            }
+        }
+        if(match) 
+        {
+            for(j = i; j < len1 - len2; j++) 
+            {
+                str[j] = str[j + len2];
+            }
+            len1 -= len2; 
+        } 
+        else 
+        {
+            i++; 
+        }
+    }
+    str[len1] = '\0';
+}
+
+int main() 
+{
+    char str[size],find[size]="paper";
+
+    printf("Enter a string: ");
+    fgets(str, sizeof(str), stdin);
+    int len = 0;
+    while (str[len] != '\0') 
+    {
+        if (str[len] == '\n') 
+        {
+            str[len] = '\0';
+            break;
+        }
+        len++;
+    }
+
+    replaceAndDelete(str,find);
+
+    printf("Replaced string: %s\n", str);
+
+    return 0;
+}
+

@@ -1,0 +1,46 @@
+// 20.Program to check if a string is a proper MAC address or not.
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+
+int validate_mac(char *mac) 
+{
+    int count = 0;
+    int colons = 0;
+    char *ptr;
+
+    if(mac == NULL)
+        return 0;
+
+    ptr = strtok(mac, ":");
+    if (ptr == NULL)
+        return 0;
+
+    while(ptr) 
+    {
+        if(strlen(ptr) != 2)
+            return 0;
+
+        for(int i = 0; ptr[i]; i++) 
+        {
+            if(!isxdigit(ptr[i]))
+                return 0;
+        }
+
+        ptr = strtok(NULL, ":");
+        if(ptr != NULL)
+            colons++;
+    }
+    return (colons == 5);
+}
+
+int main() 
+{
+    char mac[20];
+    printf("Enter a MAC address: ");
+    scanf("%s", mac);
+    validate_mac(mac) ? printf("Valid\n") : printf("Not valid\n");
+    return 0;
+}

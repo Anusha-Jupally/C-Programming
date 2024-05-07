@@ -1,0 +1,35 @@
+//23. strcspn - get the length of a complementary substring
+
+#include <stdio.h>
+#include <string.h>
+#define N 100
+
+int my_strcspn(const char str1[], const char str2[]) 
+{
+    int str1_len = strlen(str1);
+    int str2_len = strlen(str2);
+    int i, j;
+    for(i = 0; i < str1_len; i++) 
+    {
+        for(j = 0; j < str2_len; j++) 
+        {
+            if(str1[i] == str2[j]) 
+            {
+                return i;
+            }
+        }
+    }
+    return str1_len;
+}
+
+int main() 
+{
+    char str1[100], str2[100];
+    printf("Enter string 1: ");
+    fgets(str1, N, stdin);
+    printf("Enter string 2: ");
+    fgets(str2,N, stdin);
+    int length = my_strcspn(str1, str2);
+    printf("Length of unmatched characters: %d\n", length);
+    return 0;
+}

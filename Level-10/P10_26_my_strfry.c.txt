@@ -1,0 +1,31 @@
+// 26.strfry - randomize a string 
+
+#include<stdio.h>
+#include<string.h>
+#define N 100  
+
+char *my_strfry(char *str)
+{
+    int i=0,j=1,count=0,len;
+    char temp;
+    len = strlen(str)-1;
+    for(i=0,j=1;count<(len/2); i=i+2,j=j+2)
+    {
+       temp = str[i];
+       str[i] = str[j];
+       str[j] = temp;
+       count++;
+    }
+    return str;
+}
+
+int main()
+{
+    char str[N],*ptr;
+    printf("Enter string: ");
+    fgets(str,N,stdin);
+    ptr = my_strfry(str);
+    printf("Randomized a string : %s\n",ptr);
+    return 0;
+}
+

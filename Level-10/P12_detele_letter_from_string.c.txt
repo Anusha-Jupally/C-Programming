@@ -1,0 +1,26 @@
+// 12. Program to search letter ‘a’ and delete it in a string
+
+#include<stdio.h>
+#include<string.h>
+void delete_letter(char str[],char ch)
+{
+    int len=strlen(str);
+    int shift=0,i;
+    for(i=0; i<len; i++)
+    {
+        if(str[i] == ch)
+            shift++;
+        else
+            str[i-shift]=str[i];
+    }
+    str[len - shift]= '\0';
+}
+int main()
+{
+    char str[10];
+    printf("Enter string:\n");
+    scanf("%s",str);
+    delete_letter(str,'a');
+    printf("String after deleting 'a' : %s\n",str);
+    return 0;
+}

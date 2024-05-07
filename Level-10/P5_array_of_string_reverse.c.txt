@@ -1,0 +1,34 @@
+// 5 .Program to reverse all strings in an array of strings
+
+#include<stdio.h>
+#include<string.h>
+
+void reversestring(char arr[][100],int n)
+{
+    int i,j;
+    int len=strlen(arr[i]);
+    for(i=0;i<n;i++)
+    {
+        for(j=0;j<len/2;j++)
+        {
+            char temp = arr[i][j];
+            arr[i][j] = arr[i][len-j-1];
+            arr[i][len-j-1]=temp;
+        }
+    }
+}
+int main()
+{
+    int n,i;
+    printf("Enter no of strings:\n");
+    scanf("%d",&n);
+    char arr[n][100];
+    printf("Enter %d strings:\n",n);
+    for(i=0;i<n;i++)
+        scanf("%s",arr[i]);
+    reversestring(arr,n);
+    printf("Reversed string:\n");
+    for(i=0;i<n;i++)
+        printf("%s ",arr[i]);
+    return 0;
+}

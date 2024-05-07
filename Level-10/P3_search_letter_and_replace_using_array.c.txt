@@ -1,0 +1,45 @@
+// 3. Program to search letter ‘a’ and replace it with letter ‘k’ in an array of strings
+
+#include<stdio.h>
+#include<string.h>
+#define SIZE 100
+#define LENGTH 100
+
+void replace_a_with_k(char strings[][LENGTH], int num_strings);
+
+int main() 
+{
+    int num_strings,i;
+    char strings[SIZE][LENGTH];
+    printf("Enter the number of strings: ");
+    scanf("%d", &num_strings);
+
+    printf("Enter %d strings:\n", num_strings);
+    for(i = 0; i < num_strings; i++) 
+    {
+        scanf("%s",strings[i]);
+    }
+    replace_a_with_k(strings, num_strings);
+    printf("Replaced strings:\n");
+    for(i = 0; i < num_strings; i++) 
+    {
+        printf("%s\n",strings[i]);
+    }
+    return 0;
+}
+
+void replace_a_with_k(char strings[][LENGTH],int num_strings) 
+{
+    int i,j;
+    for(i = 0; i < num_strings; i++) 
+    {
+        int length = strlen(strings[i]);
+        for(j = 0; j < length; j++) 
+        {
+            if(strings[i][j] == 'a') 
+            {
+                strings[i][j] = 'k';
+            }
+        }
+    }
+}

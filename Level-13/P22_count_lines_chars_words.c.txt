@@ -1,0 +1,60 @@
+// 22.Program to number of lines, number of characters and number of words in a file
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<ctype.h>
+
+int main() 
+{
+    FILE *fp;
+    char fname[100];
+    char ch;
+    int lines = 0, characters = 0, words = 0;
+    int inWord = 0; 
+
+    printf("Enter the filename: ");
+    scanf("%s", fname);
+
+
+    fp = fopen(fname, "r");
+    if(fp == NULL) 
+    {
+        printf("Could not open file %s\n", fname);
+        return 1;
+    }
+    while((ch = fgetc(fp)) != EOF) 
+    {
+        characters++;
+        if(ch == '\n') 
+        {
+            lines++;
+        }
+        if(isspace(ch)) 
+        {
+            inWord = 0;
+        } 
+        else 
+        {
+            if(!inWord) 
+            {
+                inWord = 1;
+                words++;
+            }
+        }
+    }
+
+    if(characters > 0 && ch != '\n') 
+    {
+        lines++;
+    }
+
+    fclose(fp);
+
+    printf("Number of lines: %d\n", lines);
+    printf("Number of characters: %d\n", characters);
+    printf("Number of words: %d\n", words);
+
+    return 0;
+}
+
+

@@ -1,0 +1,38 @@
+// 13.Program to seach and replace word “paper” with the word “pen” in a file
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define SIZE 100
+
+int main() 
+{
+    FILE *fp1, *fp2;
+    char buffer[SIZE], find[] = "paper", replace[] = "pen";
+    fp1 = fopen("file1.txt", "r");
+    if(fp1 == NULL) 
+    {
+        printf("Error in opening input file.\n");
+        exit(1);
+    }
+
+    fp2 = fopen("file2.txt", "w");
+    if(fp2 == NULL) 
+    {
+        printf("Error in opening output file.\n");
+        exit(1);
+    }
+
+    while(fscanf(fp1, "%s", buffer) == 1) 
+    {
+        if(strcmp(buffer, find) == 0)
+            fprintf(fp2, "%s ", replace);
+        else
+            fprintf(fp2, "%s ", buffer);
+    }
+    fclose(fp1);
+    fclose(fp2);
+
+    return 0;
+}

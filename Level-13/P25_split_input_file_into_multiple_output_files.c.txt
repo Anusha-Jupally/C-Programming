@@ -1,0 +1,54 @@
+// 25.Program to split an input file into multiple files based on output size input by the user
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#define BUFFER_SIZE 100
+
+int main() 
+{
+    FILE *fp, *op;
+    int n, total_files, i;
+    char buffer[BUFFER_SIZE];
+
+    fp = fopen("file1.txt", "r");
+    if(fp == NULL) 
+    {
+        printf("Error opening input file\n");
+        exit(1);
+    }
+
+    printf("Enter output size: ");
+    scanf("%d", &n);
+
+    fseek(fp, 0, SEEK_END);
+    int file_size = ftell(fp);
+    rewind(fp);
+
+    total_files = (file_size + n - 1) / n; 
+
+    for(i = 1; i <= total_files; i++) 
+    {
+        snprintf(buffer, BUFFER_SIZE, "outputfile%d.txt", i);
+        op = fopen(buffer, "w");
+        if(op == NULL) 
+        {
+            printf("Error creating output file\n");
+            exit(1);
+        }
+
+        int bytes_written = 0;
+        while(bytes_written < n && fgets(buffer, BUFFER_SIZE, fp) != NULL) 
+        {
+            fputs(buffer, op);
+            bytes_written += strlen(buffer);
+        }
+
+        fclose(op);
+    }
+
+    fclose(fp);
+    printf("File successfully split!\n");
+
+    return 0;
+}

@@ -1,0 +1,21 @@
+// 2.Program to write 1 to 100 into a file
+
+#include<stdio.h>
+
+int main() 
+{
+    FILE *fp;
+    int i;
+    fp = fopen("file1.txt", "w");
+    if (fp == NULL) 
+    {
+        printf("Error opening file.\n");
+        return 1;
+    }
+    for(i = 1; i <= 100; i++) 
+    {
+        fprintf(fp, "%d\n", i);
+    }
+    fclose(fp);
+    return 0;
+}

@@ -1,0 +1,26 @@
+// 10.Program to print list of file names present in the current directory
+
+#include <stdio.h>
+#include <dirent.h>
+int main()
+{
+    DIR *directory;
+    struct dirent *dir;
+    
+    directory = opendir(".");
+    if(directory == NULL)
+    {
+        printf("Error opening directories.\n");
+        return 1;
+    }
+    
+    printf("Files in the current directory:\n");
+    
+    while((dir = readdir(directory)) != NULL)
+    {
+        printf("%s\n",dir->d_name);
+    }
+    
+    closedir(directory);
+    return 0;
+}

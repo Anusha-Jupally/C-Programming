@@ -1,0 +1,39 @@
+// 6.Program to count number of words in a file
+
+#include<stdio.h>
+#include<ctype.h>
+
+int main() 
+{
+    FILE *fp;
+    char fname[20];
+    char ch;
+    int word_count = 0;
+    int flag = 0;
+    printf("Enter the filename: ");
+    scanf("%s", fname);
+    fp = fopen(fname, "r");
+    if(fp == NULL) 
+    {
+        printf("Error opening file.\n");
+        return 1;
+    }
+    while((ch = fgetc(fp)) != EOF) 
+    {
+        if(isalpha(ch)) 
+        {
+            if(!flag) 
+            {
+                word_count++;
+                flag = 1;
+            }
+        } else {
+            flag = 0;
+        }
+    }
+
+    fclose(fp);
+    printf("Number of words in the file: %d\n", word_count);
+
+    return 0;
+}

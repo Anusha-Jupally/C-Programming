@@ -1,0 +1,53 @@
+// 15.Program to count how many mac address strings are present in a file
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+
+#define MAX_LENGTH 50 
+
+int validate_mac_address(char *str) 
+{
+    int count = 0;
+    int colons = 0;
+    while(*str != '\0') 
+    {
+        if(isxdigit(*str))
+            count++;
+        else if (*str == ':' || *str == '-')
+            colons++;
+        else 
+            return 0;
+        str++;
+    }
+    return (count == 12 && colons == 5);
+}
+
+
+int main() 
+{
+    FILE *fp;
+    char fname[MAX_LENGTH];
+    char buffer[MAX_LENGTH];
+    int count = 0;
+    
+    printf("Enter the filename: ");
+    scanf("%s", fname);
+    fp = fopen(fname, "r");
+    if(fp == NULL) 
+    {
+        printf("Error opening file.\n");
+        exit(1);
+    }
+    
+    while(fscanf(fp, "%s", buffer) == 1) 
+    {
+        if(validate_mac_address(buffer))
+            count++;
+    }
+    
+    fclose(fp);
+    printf("Total IP addresses found in the file : %d\n", count);
+    return 0;
+}
+

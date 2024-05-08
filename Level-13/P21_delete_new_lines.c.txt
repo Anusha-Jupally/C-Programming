@@ -1,0 +1,45 @@
+// 21.Program to delete all new lines in a file
+
+#include<stdio.h>
+#include<stdlib.h>
+
+int main() 
+{
+    FILE *fp;
+    char fname[100];
+    char tempfilename[] = "temp.txt";
+    char ch;
+
+    printf("Enter the filename: ");
+    scanf("%s", fname);
+
+    fp = fopen(fname, "r");
+    if(fp == NULL) 
+    {
+        printf("Error in opening file\n");
+        return 1;
+    }
+
+    FILE *tempfile = fopen(tempfilename, "w");
+    if(tempfile == NULL) 
+    {
+        printf("Could not create temporary file\n");
+        fclose(fp);
+        return 1;
+    }
+
+    while((ch = fgetc(fp)) != EOF) 
+    {
+        if(ch != '\n') 
+        {
+            fputc(ch, tempfile);
+        }
+    }
+
+    fclose(fp);
+    fclose(tempfile);
+
+    printf("New lines removed successfully from file %s\n", fname);
+
+    return 0;
+}

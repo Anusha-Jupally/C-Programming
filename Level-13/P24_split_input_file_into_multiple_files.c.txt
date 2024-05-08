@@ -1,0 +1,56 @@
+// 24.Program to split an input file into multiple files based on number of lines input by the user
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+#define MAX_LINE_LENGTH 100
+
+int main() 
+{
+    FILE *fp, *op;
+    int n, line_count = 0, total_files, i;
+    char buffer[MAX_LINE_LENGTH], ch;
+
+    fp = fopen("file1.txt", "r");
+    if(fp == NULL) 
+    {
+        printf("Error opening input file\n");
+        exit(1);
+    }
+
+    printf("Enter number of lines per file: ");
+    scanf("%d", &n);
+
+    while(fgets(buffer, MAX_LINE_LENGTH, fp)) 
+    {
+        line_count++;
+    }
+    rewind(fp);
+
+    total_files = (line_count + n - 1) / n;
+
+    for(i = 1; i <= total_files; i++) 
+    {
+        snprintf(buffer, MAX_LINE_LENGTH, "outputfile%d.txt", i);
+        op = fopen(buffer, "w");
+        if(op == NULL) 
+        {
+            printf("Error creating output file\n");
+            exit(1);
+        }
+
+        int lines_written = 0;
+        while(lines_written < n && fgets(buffer, MAX_LINE_LENGTH, fp)) 
+        {
+            fputs(buffer, op);
+            lines_written++;
+        }
+
+        fclose(op);
+    }
+
+    fclose(fp);
+    printf("File successfully split!\n");
+    return 0;
+}

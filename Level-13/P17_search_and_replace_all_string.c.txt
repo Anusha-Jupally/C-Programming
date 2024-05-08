@@ -1,0 +1,49 @@
+// 17.Program to search and replace all occurances of words “paper”, “book” with “pen” and “pencil” respectively
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#define N 50 
+
+int main() 
+{
+    FILE *fp, *fp1;
+    char buffer[N], find1[N]="paper", replace1[N]="pen", find2[N]="book", replace2[N]="pencil";
+    
+    fp = fopen("file1.txt","r+");
+    if(fp == NULL) 
+    {
+        printf("Error in opening file\n");
+        exit(1);
+    }
+    
+    fp1 = fopen("file2.txt","w");
+    if(fp1 == NULL) 
+    {
+        printf("Error in opening file\n");
+        exit(1);
+    }
+
+    while(fscanf(fp,"%s",buffer) == 1) 
+    {
+        if(strcmp(buffer,find1) == 0) 
+        {
+            fputs(replace1,fp1);
+            fputc(' ',fp1);
+        }
+        else if(strcmp(buffer,find2) == 0) 
+        {
+            fputs(replace2,fp1);
+            fputc(' ',fp1);
+        }
+        else 
+        {
+            fputs(buffer,fp1);
+            fputc(' ',fp1);
+        }
+    }
+    
+    fclose(fp1);
+    fclose(fp);
+    return 0;
+}

@@ -1,0 +1,61 @@
+// 23.Program to split an input file and create two files exactly into two halves
+
+#include<stdio.h>
+#include<stdlib.h>
+#define N 50 
+
+int main()
+{
+    FILE *fp,*output1,*output2;
+    int line = 1,count=0,res,count1;
+    char buffer[N],ch;
+    fp = fopen("file1.txt","r");
+    if(fp == NULL)
+    {
+        printf("Error in opening file\n");
+        exit(1);
+    }
+    
+    fseek(fp,0,SEEK_END);
+    res = ftell(fp);
+    rewind(fp);
+    count1 = res/2;
+    
+    output1 = fopen("outputfile1.txt","w");
+    if(output1 == NULL)
+    {
+        printf("Error in opening file\n");
+        exit(1);
+    }
+    
+    output2 = fopen("outputfile2.txt","w");
+    if(output2 == NULL)
+    {
+        printf("Error in opening file\n");
+        exit(1);
+    }
+    
+    for(ch=fgetc(fp); ch != EOF; ch=fgetc(fp))
+    {
+        if(count < count1)
+        {
+            if(ch != '\n')
+            fputc(ch,output1);
+            else
+            fputc('\n',output1);
+        }
+        else
+        {
+            if(ch != '\n')
+            fputc(ch,output2);
+            else
+            fputc('\n',output2);
+        }
+        count++;
+    }
+    
+    fclose(output1);
+    fclose(output2);
+    fclose(fp);
+    return 0;
+}

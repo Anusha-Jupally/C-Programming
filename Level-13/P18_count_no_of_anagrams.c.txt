@@ -1,0 +1,71 @@
+// 18.Program to count number of anagrams in a file
+
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+
+int areAnagrams(const char *str1, const char *str2) 
+{
+    int count1[256] = {0}; 
+    int count2[256] = {0}; 
+
+    for(int i = 0; str1[i] != '\0'; i++)
+        count1[str1[i]]++;
+
+    for(int i = 0; str2[i] != '\0'; i++)
+        count2[str2[i]]++;
+
+    for(int i = 0; i < 256; i++) 
+    {
+        if(count1[i] != count2[i])
+            return 0; 
+    }
+
+    return 1; 
+}
+
+int main() 
+{
+    FILE *fp;
+    char fname[100];
+    char word[100];
+    int count = 0;
+
+    printf("Enter the filename: ");
+    scanf("%s", fname);
+
+    fp = fopen(fname, "r");
+    if(fp == NULL) 
+    {
+        printf("Error in opening file\n");
+        return 1;
+    }
+
+    while(fscanf(fp, "%s", word) == 1) 
+    {
+        FILE *tempFile = fopen(fname, "r");
+        char tempWord[100];
+        int anagramCount = 0;
+
+        while(fscanf(tempFile, "%s", tempWord) == 1) 
+        {
+            if(strcmp(word, tempWord) != 0 && areAnagrams(word, tempWord)) 
+            {
+                anagramCount++;
+            }
+        }
+
+        fclose(tempFile);
+        
+        if(anagramCount >= 1) 
+        {
+            count++;
+            printf("Anagram found: %s\n", word);
+        }
+    }
+
+    printf("Total number of anagrams: %d\n", count);
+    fclose(fp);
+
+    return 0;
+}

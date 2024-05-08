@@ -1,0 +1,32 @@
+// 9.Program to create a file which is a copy of another file
+
+#include <stdio.h>
+
+int main()
+{
+    FILE *fp1,*fp2;
+    char src_fname[100],dest_fname[100];
+    char ch;
+    printf("Enter source file name:");
+    scanf("%s",src_fname);
+    printf("Enter destination file name:");
+    scanf("%s",dest_fname);
+    
+    fp1 = fopen(src_fname, "r");
+    if(fp1 == NULL)
+    {
+        printf("Error opening file.\n");
+        return 1;
+    }
+    
+    fp2 = fopen(dest_fname, "w");
+    
+    while((ch = fgetc(fp1)) != EOF)
+    {
+        fputc(ch, fp2);
+    }
+    fclose(fp1);
+    fclose(fp2);
+    printf("File opened successfully\n");
+    return 0;
+}

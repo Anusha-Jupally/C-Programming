@@ -1,0 +1,33 @@
+// 12.Programt to search and replace letter ‘a’ with letter ‘k’ in a file
+
+#include <stdio.h>
+
+int main()
+{
+    FILE *fp;
+    char fname[100];
+    char ch;
+    
+    printf("Enter the filename: ");
+    scanf("%s",fname);
+    
+    fp = fopen(fname, "r+");
+    
+    if(fp == NULL)
+    {
+        printf("Error in file opening.\n");
+        return 1;
+    }
+    
+    while((ch = fgetc(fp)) != EOF)
+    {
+        if(ch == 'a')
+        {
+            fseek(fp, -1, SEEK_CUR);
+            fputc('k', fp);
+        }
+    }
+    
+    fclose(fp);
+    
+}

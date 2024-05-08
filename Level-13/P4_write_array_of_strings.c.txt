@@ -1,0 +1,28 @@
+// 4.Program to write an array of strings to a file
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() 
+{
+    FILE *fp;
+    char str[20][20]; 
+    int n, i;
+    fp = fopen("file1.txt", "w");
+    if(fp == NULL) 
+    {
+        printf("Error opening file.\n");
+        return 1;
+    }
+    printf("Enter the number of strings: ");
+    scanf("%d", &n);
+    getchar(); 
+    for (i = 0; i < n; i++) 
+    {
+        printf("Enter string %d: ", i + 1);
+        fgets(str[i], sizeof(str[i]), stdin);
+        fprintf(fp, "%s", str[i]);
+    }
+    fclose(fp);
+    return 0;
+}

@@ -1,0 +1,15 @@
+// 11.Program to delete a file in the current directory whose name matches the input arguement
+
+#include <stdio.h>
+
+int main()
+{
+    char fname[100];
+    printf("Enter file name:");
+    scanf("%s",fname);
+    if(remove(fname) == 0)
+        printf("File %s deleted successfully.\n",fname);
+    else
+        printf("Unable to delete file.\n");
+    return 0;
+}

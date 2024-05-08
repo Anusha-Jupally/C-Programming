@@ -1,0 +1,44 @@
+// 10.strstr - find a substring
+
+#include<stdio.h>
+#include<string.h>
+#define size 50 
+
+char* my_strstr(char str[], char find[], int i)
+{
+    if (str[i] != '\0' && str[i] != '\n')
+    {
+        if (str[i] != find[0])
+            return my_strstr(str, find, ++i);
+        else
+        {
+            int j = 0;
+            while (find[j] != '\0' && find[j] != '\n')
+            {
+                if (str[i + j] != find[j])
+                {
+                    return my_strstr(str, find, ++i); 
+                }
+                j++;
+            }
+            return str + i;
+        }
+    }
+    return NULL;
+}
+
+int main() 
+{
+    char str[size], find[size];
+    printf("Enter string: ");
+    fgets(str, size, stdin);
+    printf("Enter character to find: ");
+    fgets(find, size, stdin); 
+    char *index = my_strstr(str, find, 0);
+    if(index == NULL) 
+        printf("No matching character found\n");
+    else 
+        printf("Substring '%s' is fond at position %ld\n", find, index - str);
+    
+    return 0;   
+}

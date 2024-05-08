@@ -1,0 +1,25 @@
+// 6.Program to find sum of all numbers in an integer array using recursion
+
+#include<stdio.h>
+#define size 10
+
+int arraysum(int arr[],int n)
+{
+    if(n <= 0)
+        return 0;
+    else
+        return arr[n-1] + arraysum(arr, n - 1);
+}
+int main()
+{
+    int arr[size],n,i;
+    printf("Enter number of elements:");
+    scanf("%d",&n);
+    printf("Enter array elements:");
+    for(i = 0; i < n; i++)
+        scanf("%d",&arr[i]);
+        
+    int sum = arraysum(arr,n);
+    printf("Sum of array elements : %d\n",sum);
+}
+

@@ -1,0 +1,38 @@
+// 7.strchr - string scanning operation
+
+#include <stdio.h>
+#define SIZE 100
+
+int my_strchr(char str[], char ch, int i);
+
+int main() 
+{
+    char str[SIZE], ch;
+    printf("Enter string: ");
+    fgets(str, SIZE, stdin);
+    printf("Enter character to search: ");
+    scanf(" %c", &ch);
+    
+    int index = my_strchr(str, ch, 0);
+    if(index == -1) 
+        printf("No matching character found\n");
+    else 
+        printf("Last occurrence of '%c' is at position %d\n", ch, index);
+    
+    return 0;   
+}
+int my_strchr(char str[], char ch, int i) 
+{
+    if(str[i] == '\0') 
+    {
+        return -1; 
+    } else if(str[i] == ch) 
+    {
+        return i;
+    } 
+    else 
+    {
+        return my_strchr(str, ch, i + 1);
+    }
+}
+

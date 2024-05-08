@@ -1,0 +1,24 @@
+// 15.strspn - get length of a substring
+
+#include <stdio.h>
+#include <string.h>
+#define N 100
+
+size_t my_strspn_recursive(const char *str, const char *accept) 
+{
+    if(*str == '\0' || strchr(accept, *str) == NULL) 
+        return 0;
+    return 1 + my_strspn_recursive(str + 1, accept); 
+}
+
+int main() 
+{
+    char str[N], accept[N];
+    printf("Enter the string: ");
+    fgets(str, N, stdin);
+    printf("Enter the set of acceptable characters: ");
+    fgets(accept, N, stdin);
+    int length = my_strspn_recursive(str, accept);
+    printf("Length of only characters from accept: %d\n", length);
+    return 0;
+}

@@ -1,0 +1,43 @@
+// 26.strfry - randomize a string
+
+#include<stdio.h>
+#include<string.h>
+#define N 100  
+
+void swap_characters(char *str, int i, int j) 
+{
+    char temp = str[i];
+    str[i] = str[j];
+    str[j] = temp;
+}
+
+void my_strfry_recursive(char *str, int i, int j, int len) 
+{
+    if(i >= len / 2) 
+    { 
+        return;
+    }
+    
+    swap_characters(str, i, j);
+    
+    my_strfry_recursive(str, i + 2, j + 2, len);
+}
+
+char *my_strfry(char *str) 
+{
+    int len = strlen(str) - 1; 
+    my_strfry_recursive(str, 0, 1, len);
+    return str;
+}
+
+int main() 
+{
+    char str[N], *ptr;
+    printf("Enter string: ");
+    fgets(str, N, stdin);
+    ptr = my_strfry(str);
+    printf("Randomized string: %s\n", ptr);
+    return 0;
+}
+
+

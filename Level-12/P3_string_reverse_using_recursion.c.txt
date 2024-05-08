@@ -1,0 +1,23 @@
+//3. Program to reverse a string using recursion
+
+#include<stdio.h>
+#define size 100
+
+void string_reverse(char *str)
+{
+    if(*str == '\0')
+    {
+        return;
+    }
+    string_reverse(str+1);
+    printf("%c",*str);
+}
+int main()
+{
+    char str[size];
+    printf("Enter string:");
+    scanf("%s",str);
+    string_reverse(str);
+    return 0;
+    
+}

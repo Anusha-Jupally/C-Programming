@@ -1,0 +1,42 @@
+// 6.strncmp - compare part of two strings
+
+
+#include <stdio.h>
+#include <string.h>
+
+#define SIZE 100
+
+int my_strncmp(char str1[], char str2[], int n, int i);
+
+int main() 
+{
+    char str1[SIZE], str2[SIZE];
+    int n;
+    printf("Enter string1:\n");
+    scanf("%s", str1);
+    printf("Enter string2:\n");
+    scanf("%s", str2);
+    printf("Enter the value of n:\n");
+    scanf("%d", &n);
+    int result = my_strncmp(str1, str2, n, 0);
+    if (result == 0)
+        printf("Strings are equal\n");
+    else
+        printf("Strings are not equal\n");
+    return 0;
+}
+int my_strncmp(char str1[], char str2[], int n, int i) 
+{
+    if (n == 0 || str1[i] == '\0' || str2[i] == '\0') 
+    {
+        return 0;
+    } else if (str1[i] != str2[i]) 
+    {
+        return 1;
+    } 
+    else 
+    {
+        return my_strncmp(str1, str2, n - 1, i + 1);
+    }
+}
+

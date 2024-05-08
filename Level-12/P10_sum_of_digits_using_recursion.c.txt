@@ -1,0 +1,20 @@
+// 10.Program to print sum of digits of an integer using recursion
+
+#include<stdio.h>
+
+int sumofdigits(int n)
+{
+    if(n == 0)
+        return 0;
+    else
+        return (n % 10)+sumofdigits(n / 10);
+    
+}
+int main()
+{
+    int n;
+    printf("Enter number:");
+    scanf("%d",&n);
+    int sum=sumofdigits(n);
+    printf("Sum of digits : %d\n",sum);
+}

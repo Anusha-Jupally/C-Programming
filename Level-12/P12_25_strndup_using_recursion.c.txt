@@ -1,0 +1,52 @@
+// 25.strndup - duplicate a specific number of bytes from a string
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#define N 100
+
+char *my_strndup_recursive(const char *str, int n, int i) 
+{
+    if(i == n || str[i] == '\0') 
+    { 
+        char *duplicate = (char *)malloc(i + 1); 
+        if(duplicate == NULL) 
+        {
+            return NULL; 
+        }
+        duplicate[i] = '\0'; 
+        return duplicate;
+    }
+    
+    char *duplicate = my_strndup_recursive(str, n, i + 1); 
+    if(duplicate == NULL) 
+    {
+        return NULL; 
+    }
+    duplicate[i] = str[i];
+    return duplicate;
+}
+
+char *my_strndup(const char *str, int n) 
+{
+    return my_strndup_recursive(str, n, 0); 
+}
+
+int main() 
+{
+    char str[N];
+    int n;
+    printf("Enter string: ");
+    fgets(str, N, stdin);
+    printf("Enter the number of bytes to duplicate: ");
+    scanf("%d", &n);
+    getchar();
+    char *duplicate = my_strndup(str, n);
+    if (duplicate != NULL) {
+        printf("Duplicated string: %s\n", duplicate);
+        free(duplicate);
+    } else {
+        printf("Memory allocation failed.\n");
+    }
+    return 0;
+}

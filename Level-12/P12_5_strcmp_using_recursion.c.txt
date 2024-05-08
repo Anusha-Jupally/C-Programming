@@ -1,0 +1,31 @@
+// 5.strcmp - compare two strings
+
+
+#include <stdio.h>
+#include <string.h>
+#define SIZE 100
+
+int my_strcmp(char str1[], char str2[], int i);
+
+int main() 
+{
+    char str1[SIZE], str2[SIZE];
+    printf("Enter string1:\n");
+    scanf("%s", str1);
+    printf("Enter string2:\n");
+    scanf("%s", str2);
+    int ret = my_strcmp(str1, str2, 0);
+    if (ret == 0)
+        printf("Strings are equal\n");
+    else
+        printf("Strings are not equal\n");
+    return 0;
+}
+int my_strcmp(char str1[], char str2[], int i) 
+{
+    if (str1[i] != str2[i] || str1[i] == '\0' || str2[i] == '\0') 
+    {
+        return str1[i] - str2[i];
+    }
+    return my_strcmp(str1, str2, i + 1);
+}

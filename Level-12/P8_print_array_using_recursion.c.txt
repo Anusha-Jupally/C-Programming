@@ -1,0 +1,26 @@
+// 8.Program to print the contens of an integer array using recursion
+
+#include<stdio.h>
+#define size 10
+
+int printarray(int arr[],int n)
+{
+    if(n <= 0)
+        return 0;
+    else
+        printarray(arr, n-1);
+        printf("%d ", arr[n-1]);
+}
+int main()
+{
+    int arr[size],n,i;
+    printf("Enter number of elements:");
+    scanf("%d",&n);
+    printf("Enter array elements:");
+    for(i = 0; i < n; i++)
+        scanf("%d",&arr[i]);
+        
+    printf("Array elements are:");
+    printarray(arr,n);
+}
+

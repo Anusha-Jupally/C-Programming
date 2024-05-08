@@ -1,0 +1,33 @@
+// 14.strsep - extract token from string
+
+#include<stdio.h>
+#include<stdlib.h>
+#define N 50 
+
+void my_strsep_recursive(char *str, char delim) 
+{
+    if(*str == '\0') 
+        return;
+
+    if(*str != delim && *str != '\n') 
+    { 
+        printf("%c", *str); 
+    } 
+    else 
+    { 
+        printf("\n"); 
+    }
+
+    my_strsep_recursive(str + 1, delim); 
+}
+
+int main() 
+{
+    char str[N], delim;
+    printf("Enter string: ");
+    fgets(str, N, stdin);
+    printf("Enter delimiter: ");
+    scanf("%c", &delim); 
+    my_strsep_recursive(str, delim);
+    return 0;
+}

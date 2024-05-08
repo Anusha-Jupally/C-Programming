@@ -1,0 +1,28 @@
+// 19.strncpy - copy fixed length string, returning a pointer to the array end
+
+#include<stdio.h>
+#include<string.h>
+#define N 100
+
+void my_strncpy_recursive(char *des, const char *src, int n, int i) 
+{
+    if (i == n || src[i] == '\0' || src[i] == '\n') 
+    { 
+        return;
+    }
+    des[i] = src[i]; 
+    my_strncpy_recursive(des, src, n, i + 1); 
+}
+
+int main() 
+{
+    char src[N], dest[N];
+    int n;
+    printf("Enter source string: ");
+    fgets(src, N, stdin);
+    printf("Enter value of n: ");
+    scanf("%d", &n);
+    my_strncpy_recursive(dest, src, n, 0); 
+    printf("After copying: %s\n", dest);
+    return 0;
+}

@@ -1,0 +1,45 @@
+// 4.strlcat - size-bounded string concatenation
+
+#include<stdio.h>
+#include<string.h>
+
+#define SIZE 100
+
+int my_strlcat(char dest[], char src[], int n, int dindex, int sindex);
+
+int main() 
+{
+    char src[SIZE], dest[SIZE];
+    int n;
+    printf("Enter the destination string:\n");
+    scanf("%s", dest);
+    printf("Enter the source string:\n");
+    scanf("%s", src);
+    printf("Enter the value of n:\n");
+    scanf("%d", &n);
+    my_strlcat(dest, src, n - 1, strlen(dest), 0);
+    printf("Concatenated string : %s", dest);
+    return 0;
+}
+
+int my_strlcat(char dest[], char src[], int n, int dindex, int sindex) 
+{
+    if (n <= 0 || src[sindex] == '\0') 
+    {
+        dest[dindex] = '\0';
+        return 0;
+    }
+
+    if (sindex == 0) 
+    {
+        int length = 0;
+        while (dest[length] != '\0') 
+        {
+            length++;
+        }
+        dindex = length;
+    }
+
+    dest[dindex] = src[sindex];
+    return my_strlcat(dest, src, n - 1, dindex + 1, sindex + 1);
+}

@@ -1,0 +1,35 @@
+// 9.strchrnul - string scanning operation
+
+#include<stdio.h>
+#include<string.h>
+#define size 50 
+
+char* my_strchrnul(char str[], char ch) 
+{
+    if (*str == '\0') 
+    {
+        return NULL; 
+    }
+    
+    char* result = my_strchrnul(str + 1, ch); 
+    
+    return (result != NULL) ? result : ((*str == ch) ? str : NULL);
+}
+
+
+int main() 
+{
+    char str[size], ch;
+    printf("Enter string: ");
+    fgets(str, size, stdin);
+    printf("Enter character to search: ");
+    scanf(" %c", &ch); 
+    
+    char *index = my_strchrnul(str, ch);
+    if(index == NULL) 
+        printf("No matching character found\n");
+    else 
+        printf("Last occurrence of '%c' is at position %ld\n", ch, index - str);
+    
+    return 0;   
+}

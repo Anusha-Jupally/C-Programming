@@ -1,0 +1,168 @@
+// 7.Program to implement insert_at_rear and delete_at_rear using recursion in single linked lists
+
+#include <stdio.h>
+#include <stdlib.h>
+struct node
+{
+    int data;           
+    struct node *next; 
+}*head;
+
+
+void createList(int n);
+void insertNodeAtEnd(int data);
+void deleteNodeAtEnd();
+void displayList();
+
+
+int main()
+{
+	int choice,data,n,position;
+	printf("Enter the total number of nodes: ");
+	scanf("%d",&n);
+	
+	createList(n);
+	
+	do
+	{
+		printf("\n1.Display List \n");
+		printf("2.Insert Node at End\n");
+		printf("3.Delete Node at End\n");
+		printf("0.Exit\n");
+		
+		printf("Enter your choice :");
+		scanf("%d",&choice);
+		
+		switch(choice)
+		{
+			case 0: printf("Exiting the program\n");
+				    break;
+			case 1: printf("\nData in the list\n");
+				    displayList();
+				    break;
+			case 2: printf("Enter the data to insert at the end:");
+				    scanf("%d",&data);
+				    insertNodeAtEnd(data);
+				    break;
+			case 3: deleteNodeAtEnd();
+				    break;
+    		default : printf("Invalid choice. Please enter a valid option.\n");
+    		}
+    	}while(choice!=0);
+    return 0;
+}
+void createList(int n)
+{
+    struct node *newNode, *temp;
+    int data, i;
+    head = (struct node *)malloc(sizeof(struct node));
+    if(head == NULL)
+    {
+        printf("Unable to allocate memory.");
+    }
+    else
+    {
+        printf("Enter the data of node 1: ");
+        scanf("%d", &data);
+        head->data = data; 
+        head->next = NULL; 
+        temp = head;
+        for(i=2; i<=n; i++)
+        {
+            newNode = (struct node *)malloc(sizeof(struct node));
+            if(newNode == NULL)
+            {
+                printf("Unable to allocate memory.");
+                break;
+            }
+            else
+            {
+                printf("Enter the data of node %d: ", i);
+                scanf("%d", &data);
+                newNode->data = data; 
+                newNode->next = NULL; 
+                temp->next = newNode; 
+                temp = temp->next; 
+            }
+        }
+        printf("SINGLY LINKED LIST CREATED SUCCESSFULLY\n");
+    }
+}
+
+void insertNodeAtEnd(int data)
+{
+	struct node *newNode,*temp;
+	newNode=(struct node*)malloc(sizeof(struct node));
+	if(newNode==NULL)
+	{
+		printf("Unable to allocate memory.");
+		return;
+	}
+	newNode->data=data;
+	newNode->next=NULL;
+	
+	if(head==NULL)
+	{
+		head=newNode;
+	}
+	else
+	{
+		temp=head;
+		while(temp->next!=NULL)
+		{
+			temp=temp->next;
+		}
+		temp->next=newNode;
+	}
+	printf("Data inserted at the end successfully.\n");
+}
+
+
+void deleteNodeAtEnd()
+{
+	struct node *temp,*prev;
+	if(head==NULL)
+	{
+		printf("List is empty, cannot delete.\n");
+		return;
+	}
+	temp=head;
+	prev=NULL;
+	
+	while(temp->next!=NULL)
+	{
+		prev=temp;
+		temp=temp->next;
+	}
+	
+	if(prev==NULL)
+	{
+		free(head); 
+		head=NULL;
+	}
+	else
+	{
+		prev->next=NULL;
+		free(temp);
+	}
+	printf("Node deleted from the end successfully.\n");
+}
+
+void displayList()
+{
+    struct node *temp;
+    if(head == NULL)
+    {
+        printf("List is empty.");
+    }
+    else
+    {
+        temp = head;
+        while(temp != NULL)
+        {
+            printf("Data = %d\n", temp->data); 
+            temp = temp->next;                 
+        }
+    }
+}
+

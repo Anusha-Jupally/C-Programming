@@ -1,0 +1,126 @@
+/* 3.SLL: Store the list of records in 2 singly linked lists according to gender. 
+Print all entries in each linked list.*/
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+#define SIZE 50 
+
+typedef struct node 
+{
+    int id;
+    char f_name[SIZE];
+    char l_name[SIZE];
+    char gender[SIZE];
+    char occupation[SIZE];
+    int age;
+    struct node *next;
+} club_member;
+
+club_member *head_male = NULL, *head_female = NULL;
+
+void create_list(club_member **head1, club_member **head2, club_member m);
+void display(club_member *head, const char *list_name);
+void release_memory(club_member **head);
+
+int main() 
+{
+    FILE *fp;
+    char buf1[SIZE], buf2[SIZE], buf3[SIZE], buf4[SIZE], buf5[SIZE];
+    int i;
+
+    fp = fopen("Club_Membership_2020.txt", "r");
+    if (fp == NULL) 
+    {
+        printf("Error\n");
+        exit(1);
+    }
+    i = 0;
+    while( i < 16)
+    {
+        club_member m;
+        if (i == 0)
+            fscanf(fp, "%s %s %s %s %s", buf1, buf2, buf3, buf4, buf5);
+        else 
+        {
+            fscanf(fp, "%d %s %s %s %s %d", &m.id, m.f_name, m.l_name, m.gender, m.occupation, &m.age);
+            create_list(&head_male, &head_female, m);
+        }
+        i++;
+    }
+
+    printf("Male Members:\n");
+    display(head_male, "Male");
+
+    printf("\nFemale Members:\n");
+    display(head_female, "Female");
+
+    release_memory(&head_male);
+    release_memory(&head_female);
+    fclose(fp);
+    return 0;
+}
+
+void create_list(club_member **head1, club_member **head2, club_member m) 
+{
+    club_member *newnode = (club_member *)malloc(sizeof(club_member));
+    if(newnode == NULL)
+        printf("Unable to allocate memory\n");
+    else 
+    {
+        *newnode = m;
+        newnode->next = NULL;
+        if(strcmp(newnode->gender, "Male") == 0) 
+        {
+            if(*head1 == NULL)
+                *head1 = newnode;
+            else 
+            {
+                club_member *temp = *head1;
+                while(temp->next != NULL)
+                    temp = temp->next;
+                temp->next = newnode;
+            }
+        } 
+        else 
+        {
+            if(*head2 == NULL)
+                *head2 = newnode;
+            else 
+            {
+                club_member *temp = *head2;
+                while(temp->next != NULL)
+                    temp = temp->next;
+                temp->next = newnode;
+            }
+        }
+    }
+}
+
+void display(club_member *head, const char *list_name) 
+{
+    if(head == NULL)
+        printf("No data in the %s list\n", list_name);
+    else 
+    {
+        printf("ID\tName\t\tGender\tOccupation\tAge\n");
+        while(head != NULL) 
+        {
+            printf("%d\t%s %s\t%s\t%s\t\t%d\n", head->id, head->f_name, head->l_name, head->gender, head->occupation, head->age);
+            head = head->next;
+        }
+    }
+    printf("\n");
+}
+
+void release_memory(club_member **head) 
+{
+    club_member *temp;
+    while (*head != NULL) 
+    {
+        temp = *head;
+        *head = (*head)->next;
+        free(temp);
+    }
+}

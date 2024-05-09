@@ -1,0 +1,155 @@
+/* 20.DLL: Store the list of records in a doubly linked list. Sort all entries according to occupation. 
+Print only one entry for each occupation. */
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+#define SIZE 100
+
+typedef struct node 
+{
+    int id;
+    char fname[SIZE];
+    char lname[SIZE];
+    char gender[SIZE];
+    char occupation[SIZE];
+    int age;
+    struct node *prev;
+    struct node *next;
+} club_member;
+
+void create_list(club_member **head, club_member m);
+void sort_list(club_member **head);
+void display_list(club_member *head);
+void release_memory(club_member **head);
+
+int main() 
+{
+    FILE *fp;
+    char buf1[SIZE], buf2[SIZE], buf3[SIZE], buf4[SIZE], buf5[SIZE];
+    club_member *head = NULL;
+
+    fp = fopen("Club_Membership_2020.txt", "r");
+    if(fp == NULL) 
+    {
+        printf("Error in opening file\n");
+        exit(1);
+    }
+
+    int i = 0;
+    while(i < 16) 
+    {
+        club_member m;
+        if(i == 0) 
+        {
+            fscanf(fp, "%s %s %s %s %s", buf1, buf2, buf3, buf4, buf5);
+            
+        } 
+        else 
+        {
+            fscanf(fp, "%d %s %s %s %s %d", &m.id, m.fname, m.lname, m.gender, m.occupation, &m.age);
+            create_list(&head, m);
+        }
+        i++;
+    }
+
+    printf("Original list:\n");
+    display_list(head);
+
+    sort_list(&head);
+
+    printf("\nSorted list:\n");
+    display_list(head);
+
+    release_memory(&head);
+    fclose(fp);
+    return 0;
+}
+
+void create_list(club_member **head, club_member m) 
+{
+    club_member *newnode = (club_member *)malloc(sizeof(club_member));
+    if(newnode == NULL) 
+    {
+        printf("Cannot allocate memory\n");
+        exit(1);
+    }
+    *newnode = m;
+    newnode->prev = NULL;
+    newnode->next = NULL;
+    if(*head == NULL) 
+    {
+        *head = newnode;
+    } 
+    else 
+    {
+        club_member *temp = *head;
+        while(temp->next != NULL) 
+        {
+            temp = temp->next;
+        }
+        temp->next = newnode;
+        newnode->prev = temp;
+    }
+}
+
+void sort_list(club_member **head) 
+{
+    club_member *current, *next;
+    int swapped;
+    if(*head == NULL) 
+    {
+        return;
+    }
+    do 
+    {
+        swapped = 0;
+        current = *head;
+        while(current->next != NULL) 
+        {
+            next = current->next;
+            if(strcmp(current->occupation, next->occupation) > 0) 
+            {
+                char temp_occ[SIZE];
+                strcpy(temp_occ, current->occupation);
+                strcpy(current->occupation, next->occupation);
+                strcpy(next->occupation, temp_occ);
+                swapped = 1;
+            }
+            current = current->next;
+        }
+    } while(swapped);
+}
+
+void display_list(club_member *head) 
+{
+    if(head == NULL) 
+    {
+        printf("List is empty\n");
+        return;
+    }
+    printf("ID\tName\t\t\tGender\tOccupation\tAge\n");
+    club_member *current = head;
+    char printed_occ[SIZE] = "";
+    while(current != NULL) 
+    {
+        if(strcmp(printed_occ, current->occupation) != 0) 
+        {
+            printf("%d\t%s %s\t\t%s\t%s\t\t%d\n", current->id, current->fname, current->lname, current->gender, current->occupation, current->age);
+            strcpy(printed_occ, current->occupation);
+        }
+        current = current->next;
+    }
+}
+
+void release_memory(club_member **head) 
+{
+    club_member *temp;
+    while(*head != NULL) 
+    {
+        temp = *head;
+        *head = (*head)->next;
+        free(temp);
+    }
+}

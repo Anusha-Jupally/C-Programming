@@ -1,0 +1,114 @@
+/* 7.SLL: Store the list of records in a singly linked list. Print all entries in the linked list. 
+While displaying the SLL, print an additional text “[Mark for title upgrade]” for all members whose age is greater than 45.*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define SIZE 50
+
+typedef struct node 
+{
+    int id;
+    char fname[SIZE];
+    char lname[SIZE];
+    char gender[SIZE];
+    char occupation[SIZE];
+    int age;
+    struct node *next;
+} club_member;
+
+
+void create_list(club_member **head, club_member m);
+void display(club_member *head);
+void release_memory(club_member **head);
+
+int main() 
+{
+    FILE *fp;
+    club_member *head = NULL;
+    char buf1[SIZE], buf2[SIZE], buf3[SIZE], buf4[SIZE], buf5[SIZE];
+    int i;
+
+    fp = fopen("Club_Membership_2020.txt", "r");
+    if(fp == NULL) 
+    {
+        printf("Error in opening file\n");
+        exit(1);
+    }
+    i = 0;
+    while(i < 16) 
+    {
+        club_member m;
+        if(i == 0)
+            fscanf(fp, "%s %s %s %s %s", buf1, buf2, buf3, buf4, buf5);
+        else 
+        {
+            fscanf(fp, "%d %s %s %s %s %d", &m.id, m.fname, m.lname, m.gender, m.occupation, &m.age);
+            create_list(&head, m);
+        }
+        i++;
+    }
+
+    printf("List of Club Members:\n");
+    display(head);
+
+    release_memory(&head);
+    fclose(fp);
+    return 0;
+}
+
+void create_list(club_member **head, club_member m) 
+{
+    club_member *newnode = (club_member *)malloc(sizeof(club_member));
+    if(newnode == NULL) 
+    {
+        printf("Unable to allocate memory\n");
+        exit(1);
+    }
+
+    *newnode = m;
+    newnode->next = NULL;
+
+    if(*head == NULL) 
+    {
+        *head = newnode;
+    } 
+    else 
+    {
+        club_member *temp = *head;
+        while (temp->next != NULL) 
+        {
+            temp = temp->next;
+        }
+        temp->next = newnode;
+    }
+}
+
+
+
+void display(club_member *head) 
+{
+    printf("ID\tName\t\t\tGender\tOccupation\tAge\n");
+    while(head != NULL) 
+    {
+        printf("%d\t%s %s\t\t%s\t%s\t\t%d", head->id, head->fname, head->lname, head->gender, head->occupation, head->age);
+        if(head->age > 45) 
+        {
+            printf("\t[Mark for title upgrade]");
+        }
+        printf("\n");
+        head = head->next;
+    }
+}
+
+void release_memory(club_member **head) 
+{
+    club_member *temp;
+    while(*head != NULL) 
+    {
+        temp = *head;
+        *head = (*head)->next;
+        free(temp);
+    }
+}

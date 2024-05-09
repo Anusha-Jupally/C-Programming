@@ -1,0 +1,135 @@
+/* 17.DLL: Store the list of records in 2 singly linked lists according to gender. 
+Print all entries in each DLL starting from the tail of the DLL.*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define SIZE 100
+
+typedef struct node 
+{
+    int id;
+    char fname[SIZE];
+    char lname[SIZE];
+    char gender[SIZE];
+    char occupation[SIZE];
+    int age;
+    struct node *next;
+} club_member;
+
+club_member *male_head = NULL;
+club_member *female_head = NULL;
+
+void create_list(club_member **head, club_member m);
+void display_from_tail(club_member *head);
+void release_memory(club_member **head);
+
+int main() 
+{
+    FILE *fp;
+    char buf1[SIZE], buf2[SIZE], buf3[SIZE], buf4[SIZE], buf5[SIZE];
+    
+    fp = fopen("Club_Membership_2020.txt", "r");
+    if(fp == NULL) 
+    {
+        printf("Error in opening file\n");
+        exit(1);
+    }
+
+    int i = 0;
+    while (i < 16) 
+    {
+        club_member m;
+        if(i == 0) 
+        {
+            fscanf(fp, "%s %s %s %s %s", buf1, buf2, buf3, buf4, buf5);
+            printf("%s\t %s\t\t\t %s\t %s\t %s\n", buf1, buf2, buf3, buf4, buf5);
+        }
+        else 
+        {
+            fscanf(fp, "%d %s %s %s %s %d", &m.id, m.fname, m.lname, m.gender, m.occupation, &m.age);
+            create_list((strcmp(m.gender, "Male") == 0) ? &male_head : &female_head, m);
+        }
+        i++;
+    }
+    
+    printf("\nMale Members:\n");
+    display_from_tail(male_head);
+    
+    printf("\nFemale Members:\n");
+    display_from_tail(female_head);
+
+    release_memory(&male_head);
+    release_memory(&female_head);
+    fclose(fp);
+    return 0;
+}
+
+void create_list(club_member **head, club_member m) 
+{
+    club_member *newnode = (club_member *)malloc(sizeof(club_member));
+    if(newnode == NULL) 
+    {
+        printf("Cannot allocate memory\n");
+        exit(1);
+    }
+    *newnode = m;
+    newnode->next = NULL;
+
+    if(*head == NULL) 
+    {
+        *head = newnode;
+    } 
+    else 
+    {
+        club_member *temp = *head;
+        while(temp->next != NULL) 
+        {
+            temp = temp->next;
+        }
+        temp->next = newnode;
+    }
+}
+
+void display_from_tail(club_member *head) 
+{
+    if(head == NULL) 
+    {
+        printf("No data in the list\n");
+    } 
+    else 
+    {
+        club_member *prev = NULL;
+        club_member *current = head;
+        club_member *next = NULL;
+        
+        while (current != NULL) 
+        {
+            next = current->next;
+            current->next = prev;
+            prev = current;
+            current = next;
+        }
+
+        while (prev != NULL) 
+        {
+            printf("%d\t%s %s\t\t%s\t%s\t\t%d\n", prev->id, prev->fname, prev->lname, prev->gender, prev->occupation, prev->age);
+            current = prev;
+            prev = prev->next;
+            current->next = next;
+        }
+    }
+}
+
+void release_memory(club_member **head) 
+{
+    club_member *temp = *head;
+    while(temp != NULL) 
+    {
+        club_member *temp1 = temp;
+        temp = temp->next;
+        free(temp1);
+    }
+    *head = NULL;
+}

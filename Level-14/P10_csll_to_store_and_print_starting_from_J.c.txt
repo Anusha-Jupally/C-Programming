@@ -1,0 +1,155 @@
+/* 10.CSLL: Store the list of records in a circular singly linked list after sorting the records in alphabetic order by member names. 
+Print all entries in the CSLL but starting from the alphabet J*/
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+#define SIZE 50 
+
+typedef struct node 
+{
+    int id;
+    char fname[SIZE];
+    char lname[SIZE];
+    char gender[SIZE];
+    char occupation[SIZE];
+    int age;
+    struct node *next;
+} club_member;
+
+void create_list(club_member **head, club_member m);
+void sort_list(club_member **head);
+void display_from_J(club_member *head);
+void release_memory(club_member **head);
+
+int main() 
+{
+    FILE *fp;
+    club_member *head = NULL;
+    char buf1[SIZE], buf2[SIZE], buf3[SIZE], buf4[SIZE], buf5[SIZE];
+    int i;
+
+    fp = fopen("Club_Membership_2020.txt", "r");
+    if(fp == NULL) 
+    {
+        printf("Error in opening file\n");
+        exit(1);
+    }
+
+    i = 0;
+    while(i < 16) 
+    {
+        club_member m;
+        if(i == 0)
+            fscanf(fp, "%s %s %s %s %s", buf1, buf2, buf3, buf4, buf5);
+        else 
+        {
+            fscanf(fp, "%d %s %s %s %s %d", &m.id, m.fname, m.lname, m.gender, m.occupation, &m.age);
+            create_list(&head, m);
+        }
+        i++;
+    }
+
+    sort_list(&head);
+
+    printf("Members with names starting from 'J':\n");
+    display_from_J(head);
+
+    release_memory(&head);
+    fclose(fp);
+    return 0;
+}
+
+void create_list(club_member **head, club_member m) 
+{
+    club_member *newnode = (club_member *)malloc(sizeof(club_member));
+    if(newnode == NULL) 
+    {
+        printf("Unable to allocate memory\n");
+        exit(1);
+    }
+
+    *newnode = m;
+    if(*head == NULL) 
+    {
+        newnode->next = newnode;  
+        *head = newnode;
+    } 
+    else 
+    {
+        club_member *current = *head;
+        while(current->next != *head && strcmp(current->next->fname, m.fname) < 0) 
+        {
+            current = current->next;
+        }
+        newnode->next = current->next;
+        current->next = newnode;
+    }
+    *head = newnode;
+}
+
+void sort_list(club_member **head) 
+{
+    if(*head == NULL || (*head)->next == *head) 
+    {
+        return;  
+    }
+
+    club_member *current = *head;
+    club_member *index = NULL;
+    char temp[SIZE];
+
+    do 
+    {
+        index = current->next;
+        while(index != *head) 
+        {
+            if(strcmp(current->fname, index->fname) > 0) 
+            {
+                strcpy(temp, current->fname);
+                strcpy(current->fname, index->fname);
+                strcpy(index->fname, temp);
+            }
+            index = index->next;
+        }
+        current = current->next;
+    } while(current->next != *head);
+}
+
+void display_from_J(club_member *head) 
+{
+    if(head == NULL) 
+    {
+        printf("No data in the list\n");
+        return;
+    }
+
+    club_member *current = head;
+    printf("ID\tName\t\t\tGender\tOccupation\tAge\n");
+    do 
+    {
+        if(current->fname[0] >= 'J') 
+        {
+            printf("%d\t%s %s\t\t%s\t%s\t%d\n", current->id, current->fname, current->lname, current->gender, current->occupation, current->age);
+        }
+        current = current->next;
+    } while(current != head);
+}
+
+void release_memory(club_member **head) 
+{
+    club_member *temp;
+    if(*head == NULL)
+        return; 
+
+    club_member *current = *head;
+    do
+    {
+        temp = current;
+        current = current->next;
+        free(temp);
+    } while(current != *head); 
+
+    *head = NULL; 
+}

@@ -1,0 +1,120 @@
+/* 4.SLL: Store the list of records in mutiple SLL according to age buckets (21-30, 31-40, 41-50, 51-60). 
+Print all entries in each linked list.*/
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+#define SIZE 50 
+
+typedef struct node 
+{
+    int id;
+    char fname[SIZE];
+    char lname[SIZE];
+    char gender[SIZE];
+    char occupation[SIZE];
+    int age;
+    struct node *next;
+} club_member;
+
+void create_list(club_member **buckets, club_member m);
+void display_buckets(club_member **buckets, const char *bucket_names[], int num_buckets);
+void release_memory(club_member **buckets, int num_buckets);
+
+int main() 
+{
+    FILE *fp;
+    club_member *buckets[4] = {NULL}; 
+    const char *bucket_names[] = {"21-30", "31-40", "41-50", "51-60"}; 
+    char buf1[SIZE], buf2[SIZE], buf3[SIZE], buf4[SIZE], buf5[SIZE];
+    int i;
+
+    fp = fopen("Club_Membership_2020.txt", "r");
+    if(fp == NULL)
+    {
+        printf("Error in opening file\n");
+        exit(1);
+    }
+    i = 0;
+    while( i < 16)
+    {
+        club_member m;
+        if(i == 0)
+            fscanf(fp, "%s %s %s %s %s", buf1, buf2, buf3, buf4, buf5);
+        else 
+	  {
+            fscanf(fp, "%d %s %s %s %s %d", &m.id, m.fname, m.lname, m.gender, m.occupation, &m.age);
+            create_list(buckets, m);
+        }
+        i++;
+    }
+
+    display_buckets(buckets, bucket_names, 4);
+
+    release_memory(buckets, 4);
+    fclose(fp);
+    return 0;
+}
+
+void create_list(club_member **buckets, club_member m) 
+{
+    int index;
+    if (m.age >= 21 && m.age <= 30)
+        index = 0;
+    else if (m.age >= 31 && m.age <= 40)
+        index = 1;
+    else if (m.age >= 41 && m.age <= 50)
+        index = 2;
+    else if (m.age >= 51 && m.age <= 60)
+        index = 3;
+    else
+        return; 
+
+    club_member *newnode = (club_member *)malloc(sizeof(club_member));
+    if(newnode == NULL) 
+    {
+        printf("Unable to allocate memory\n");
+        return;
+    }
+
+    *newnode = m;
+    newnode->next = buckets[index];
+    buckets[index] = newnode;
+}
+
+void display_buckets(club_member **buckets, const char *bucket_names[], int num_buckets) 
+{
+    for(int i = 0; i < num_buckets; i++) 
+    {
+        printf("Members in age group %s:\n", bucket_names[i]);
+        if(buckets[i] == NULL) 
+        {
+            printf("No data in this age group\n\n");
+        } 
+        else 
+        {
+            club_member *temp = buckets[i];
+            while(temp != NULL) 
+            {
+                printf(" %d,  %s %s, %s, %s, %d\n",temp->id, temp->fname, temp->lname, temp->gender, temp->occupation, temp->age);
+                temp = temp->next;
+            }
+            printf("\n");
+        }
+    }
+}
+
+void release_memory(club_member **buckets, int num_buckets) 
+{
+    for(int i = 0; i < num_buckets; i++) 
+    {
+        club_member *temp;
+        while(buckets[i] != NULL) 
+        {
+            temp = buckets[i];
+            buckets[i] = buckets[i]->next;
+            free(temp);
+        }
+    }
+}

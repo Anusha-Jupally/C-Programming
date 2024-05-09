@@ -1,0 +1,143 @@
+/*26. CDLL: Store the list of records in a circular doubly linked list. 
+Print only the members in the CDLL who are above the age of 40.*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define SIZE 100
+
+typedef struct node 
+{
+    int id;
+    char fname[SIZE];
+    char lname[SIZE];
+    char gender[SIZE];
+    char occupation[SIZE];
+    int age;
+    struct node *prev;
+    struct node *next;
+} club_member;
+
+void create_list(club_member **head, club_member m);
+void display_above_40(club_member *head);
+void display_cdll(club_member *head);
+void release_memory(club_member **head);
+
+int main() 
+{
+    FILE *fp;
+    char buf1[SIZE], buf2[SIZE], buf3[SIZE], buf4[SIZE], buf5[SIZE];
+    club_member *head = NULL;
+
+    fp = fopen("Club_Membership_2020.txt", "r");
+    if(fp == NULL) 
+    {
+        printf("Error in opening file\n");
+        exit(1);
+    }
+
+    int i = 0;
+    while(i < 16) 
+    {
+        club_member m;
+        if(i == 0) 
+        {
+            fscanf(fp, "%s %s %s %s %s", buf1, buf2, buf3, buf4, buf5);
+        } 
+        else 
+        {
+            fscanf(fp, "%d %s %s %s %s %d", &m.id, m.fname, m.lname, m.gender, m.occupation, &m.age);
+            create_list(&head, m);
+        }
+        i++;
+    }
+
+    printf("Original CDLL:\n");
+    display_cdll(head);
+
+    printf("\nMembers above 40 years of age:\n");
+    display_above_40(head);
+
+    release_memory(&head); 
+    fclose(fp);
+
+    return 0;
+}
+
+void create_list(club_member **head, club_member m) 
+{
+    club_member *newnode = (club_member *)malloc(sizeof(club_member));
+    if(newnode == NULL) 
+    {
+        printf("Cannot allocate memory\n");
+        exit(1);
+    }
+    *newnode = m;
+    if(*head == NULL) 
+    {
+        *head = newnode;
+        (*head)->next = *head;
+        (*head)->prev = *head;
+    } 
+    else 
+    {
+        club_member *temp = (*head)->prev;
+        temp->next = newnode;
+        newnode->prev = temp;
+        newnode->next = *head;
+        (*head)->prev = newnode;
+    }
+}
+
+void display_cdll(club_member *head) 
+{
+    if(head == NULL) 
+    {
+        printf("CDLL is empty\n");
+        return;
+    }
+    printf("ID\tName\t\t\tGender\tOccupation\tAge\n");
+    club_member *current = head;
+    do 
+    {
+        printf("%d\t%s %s\t\t%s\t%s\t\t%d\n", current->id, current->fname, current->lname, current->gender, current->occupation, current->age);
+        current = current->next;
+    } while(current != head);
+}
+
+void display_above_40(club_member *head) 
+{
+    if(head == NULL) 
+    {
+        printf("CDLL is empty\n");
+        return;
+    }
+    printf("ID\tName\t\t\tGender\tOccupation\tAge\n");
+    club_member *current = head;
+    do 
+    {
+        if(current->age > 40) 
+        {
+            printf("%d\t%s %s\t\t%s\t%s\t\t%d\n", current->id, current->fname, current->lname, current->gender, current->occupation, current->age);
+        }
+        current = current->next;
+    } while(current != head);
+}
+
+void release_memory(club_member **head) 
+{
+    if(*head == NULL) 
+    {
+        return;
+    }
+    club_member *current = (*head)->next;
+    while(current != *head) 
+    {
+        club_member *temp = current;
+        current = current->next;
+        free(temp);
+    }
+    free(*head);
+    *head = NULL;
+}

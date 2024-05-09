@@ -1,0 +1,148 @@
+/* 19.DLL: Store the list of records in mutiple DLLs according to age buckets (21-30, 31-40, 41-50, 51-60). 
+The records in the age bucket must be storted acording to increasing age. 
+Print all entries in each DLL in reverse age order for each bucket.*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define SIZE 100
+
+typedef struct node 
+{
+    int id;
+    char fname[SIZE];
+    char lname[SIZE];
+    char gender[SIZE];
+    char occupation[SIZE];
+    int age;
+    struct node *prev;
+    struct node *next;
+}club_member;
+
+void insert_sorted(club_member **head, club_member *new_node);
+void print_reverse(club_member *head);
+void release_memory(club_member *head);
+
+int main() 
+{
+    FILE *fp;
+    char line[SIZE];
+    club_member *age_21_30_head = NULL;
+    club_member *age_31_40_head = NULL;
+    club_member *age_41_50_head = NULL;
+    club_member *age_51_60_head = NULL;
+
+    fp = fopen("Club_Membership_2020.txt", "r");
+    if(fp == NULL) 
+    {
+        printf("Error in opening file\n");
+        exit(1);
+    }
+
+    while(fgets(line, sizeof(line), fp)) 
+    {
+        club_member *new_node = (club_member *)malloc(sizeof(club_member));
+        if(new_node == NULL) 
+        {
+            printf("Memory allocation failed\n");
+            exit(1);
+        }
+        sscanf(line, "%d %s %s %s %s %d", &new_node->id, new_node->fname, new_node->lname, new_node->gender, new_node->occupation, &new_node->age);
+        
+        if(new_node->age >= 21 && new_node->age <= 30) 
+        {
+            insert_sorted(&age_21_30_head, new_node);
+        } else if(new_node->age >= 31 && new_node->age <= 40) 
+        {
+            insert_sorted(&age_31_40_head, new_node);
+        } else if(new_node->age >= 41 && new_node->age <= 50) 
+        {
+            insert_sorted(&age_41_50_head, new_node);
+        } else if(new_node->age >= 51 && new_node->age <= 60) 
+        {
+            insert_sorted(&age_51_60_head, new_node);
+        } else 
+        {
+            free(new_node);
+        }
+    }
+
+    fclose(fp);
+
+    printf("Age Bucket 21-30:\n");
+    print_reverse(age_21_30_head);
+    printf("\n");
+
+    printf("Age Bucket 31-40:\n");
+    print_reverse(age_31_40_head);
+    printf("\n");
+
+    printf("Age Bucket 41-50:\n");
+    print_reverse(age_41_50_head);
+    printf("\n");
+
+    printf("Age Bucket 51-60:\n");
+    print_reverse(age_51_60_head);
+    printf("\n");
+
+    release_memory(age_21_30_head);
+    release_memory(age_31_40_head);
+    release_memory(age_41_50_head);
+    release_memory(age_51_60_head);
+
+    return 0;
+}
+
+void insert_sorted(club_member **head, club_member *new_node) 
+{
+    if(*head == NULL) 
+    {
+        *head = new_node;
+    } 
+    else if(new_node->age < (*head)->age) 
+    {
+        new_node->next = *head;
+        (*head)->prev = new_node;
+        *head = new_node;
+    } 
+    else 
+    {
+        club_member *current = *head;
+        while(current->next != NULL && current->next->age < new_node->age) 
+        {
+            current = current->next;
+        }
+        new_node->next = current->next;
+        if(current->next != NULL) 
+        {
+            current->next->prev = new_node;
+        }
+        current->next = new_node;
+        new_node->prev = current;
+    }
+}
+
+void print_reverse(club_member *head) 
+{
+    club_member *temp = head;
+    while(temp->next != NULL) 
+    {
+        temp = temp->next;
+    }
+    while(temp != NULL) 
+    {
+        printf("%d\t%s %s\t\t%s\t%s\t\t%d\n", temp->id, temp->fname, temp->lname, temp->gender, temp->occupation, temp->age);
+        temp = temp->prev;
+    }
+}
+
+void release_memory(club_member *head) 
+{
+    while(head != NULL) 
+    {
+        club_member *temp = head;
+        head = head->next;
+        free(temp);
+    }
+}

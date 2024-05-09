@@ -1,0 +1,16 @@
+// 5.Structure padding
+
+#include<stdio.h>
+
+struct stu
+{
+    int rollno;
+    char name;
+};
+
+int main()
+{
+    struct stu s;
+    printf("Size of Structure : %ld\n",sizeof(s));
+    return 0;
+}

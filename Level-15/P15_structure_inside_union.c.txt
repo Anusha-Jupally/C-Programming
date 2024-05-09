@@ -1,0 +1,23 @@
+// 15.Structures inside a union
+
+#include<stdio.h>
+
+union u_stu
+{
+    int rollno;
+    char name[10];
+    struct stu      
+    {
+        int id;
+    }s;
+};
+
+int main()
+{
+    union u_stu u;
+    u.rollno = 1;
+    printf("Roll No : %d\n",u.rollno);
+    printf("Name : %s\n",u.name);
+    printf("ID : %d\n",u.s.id);
+    return 0;
+}

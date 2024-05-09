@@ -1,0 +1,20 @@
+// 4.Structure Triple Pointers
+
+#include<stdio.h>
+
+struct stu
+{
+    int rollno;
+    char name[10];
+};
+
+int main()
+{
+    struct stu s = { 1, "Anusha"};
+    struct stu *p = &s;
+    struct stu **p1 = &p;
+    struct stu ***p2 = &p1;
+    printf("Roll No : %d\n",(**p2)->rollno);
+    printf("Name : %s\n",(**p2)->name);
+    return 0;
+}

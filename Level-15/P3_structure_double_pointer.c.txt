@@ -1,0 +1,19 @@
+// 3.Structure Double Pointers
+
+#include<stdio.h>
+
+struct stu
+{
+    int rollno;
+    char name[10];
+};
+
+int main()
+{
+    struct stu s = { 1, "Anusha"};
+    struct stu *p = &s;
+    struct stu **p1 = &p;
+    printf("Roll No : %d\n",(*p1)->rollno);
+    printf("Name : %s\n",(*p1)->name);
+    return 0;
+}

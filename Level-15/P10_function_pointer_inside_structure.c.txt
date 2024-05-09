@@ -1,0 +1,33 @@
+// 10.Function pointers inside structures
+
+#include<stdio.h>
+
+struct calculate
+{
+    int (*add)(int, int);
+    int (*sub)(int, int);
+};
+
+int add(int a, int b) 
+{
+    return a + b;
+}
+
+int sub(int a, int b) 
+{
+    return a - b;
+}
+
+int main() 
+{
+    struct calculate calc;
+    calc.add = add;
+    calc.sub = sub;
+    int result_add = calc.add(5,3);
+    int result_sub = calc.sub(5,3);
+
+    printf("Addition: %d\n", result_add); 
+    printf("Subtraction: %d\n", result_sub); 
+
+    return 0;
+}

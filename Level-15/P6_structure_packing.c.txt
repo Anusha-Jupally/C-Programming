@@ -1,0 +1,16 @@
+// 6.Structure packing
+
+#include<stdio.h>
+#pragma pack(1)
+struct stu
+{
+    int rollno;
+    char name;
+};
+
+int main()
+{
+    struct stu s;
+    printf("Size of Structure : %ld\n",sizeof(s));
+    return 0;
+}

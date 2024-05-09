@@ -1,0 +1,22 @@
+// 18.Passing structure as function arguments
+
+#include <stdio.h>
+
+struct fun 
+{
+    int x;
+    int y;
+};
+
+void printfun(struct fun p) 
+{
+    printf("myfun : %d, %d\n", p.x, p.y);
+}
+
+int main() 
+{
+    struct fun myfun = {3, 4};
+    printfun(myfun);
+
+    return 0;
+}

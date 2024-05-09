@@ -1,0 +1,21 @@
+// 8.Zero length arrays in structures
+
+#include<stdio.h>
+#include<stdlib.h>
+
+struct abc 
+{
+    int data;
+    char arr[0];
+};
+
+int main() 
+{ 
+    int data = 4;
+    struct abc *s = (struct abc*)malloc(sizeof(struct abc) + data * sizeof(char));
+    s->data = data;
+    s->arr[0] = 's';
+    printf("%c\n", s->arr[0]);
+    free(s);
+    return 0; 
+}

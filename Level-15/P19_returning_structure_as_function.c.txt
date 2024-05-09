@@ -1,0 +1,23 @@
+// 19.Returning structure as function return types
+
+#include<stdio.h>
+
+struct fun 
+{
+    int x;
+    int y;
+};
+
+struct fun printfun() 
+{
+    struct fun p = {3, 4};
+    return p;
+}
+
+int main() 
+{
+    struct fun myfun = printfun();
+    printf("myfun : %d, %d\n", myfun.x, myfun.y);
+
+    return 0;
+}

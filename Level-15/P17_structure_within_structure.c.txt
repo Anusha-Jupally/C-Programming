@@ -1,0 +1,23 @@
+// 17.Structures with in a structure
+
+#include<stdio.h>
+
+struct stu
+{
+    int rollno;
+    char name[10];
+    struct s_stu      
+    {
+        int id;
+    }s1;
+};
+
+int main()
+{
+    struct stu s = { 1, "Anusha"};
+    s.s1.id = 1021;
+    printf("Roll No : %d\n",s.rollno);
+    printf("Name : %s\n",s.name);
+    printf("ID : %d\n",s.s1.id);
+    return 0;
+}

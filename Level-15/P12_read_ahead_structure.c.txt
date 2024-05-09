@@ -1,0 +1,32 @@
+// 12.Read ahead structure declaration
+
+#include <stdio.h>
+
+struct node;
+
+struct node 
+{
+    int data;
+    struct node *next;
+};
+
+int main() 
+{
+    
+    struct node n1, n2, n3;
+    n1.data = 1;
+    n2.data = 2;
+    n3.data = 3;
+    n1.next = &n2;
+    n2.next = &n3;
+    n3.next = NULL;
+    struct node *current = &n1; 
+    while (current != NULL) \
+    {
+        printf("%d ", current->data);
+        current = current->next;
+    }
+    printf("\n");
+
+    return 0;
+}
